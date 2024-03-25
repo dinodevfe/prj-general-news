@@ -4,7 +4,11 @@ import { Box, Stack, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import SourceDefault from '@/images/source-logo.jpg'
 
-export default class TopicInfo extends Component {
+interface IProps {
+  title: string
+}
+
+export default class TopicInfo extends Component<IProps> {
   render() {
     return (
       <Wrapper>
@@ -13,7 +17,7 @@ export default class TopicInfo extends Component {
         </AvatarSource>
         <Box sx={{ width: '100%', pb: '60%', position: 'relative' }}>
           <Content>
-            <Typography variant='h5'>News Title</Typography>
+            <Typography variant='h5'>{this.props.title}</Typography>
           </Content>
         </Box>
       </Wrapper>

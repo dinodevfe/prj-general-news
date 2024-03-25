@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-// import "./globals.css";
-import "./globals-v2.css";
+import './globals-v2.css'
+import CustomLayout from '@/components/Layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,7 +38,9 @@ export default function RootLayout({
         <link rel='preconnect' href='https://fonts.gstatic.com' />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' />
       </header> */}
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <CustomLayout>{children}</CustomLayout>
+      </body>
     </html>
   )
 }

@@ -1,18 +1,43 @@
 'use client'
-import { Container, Grid } from '@mui/material'
 import React, { Component } from 'react'
+import { INewsDTO, ISlugProps } from '@/models'
+import { Container, Grid } from '@mui/material'
 import CardMultiple from '../_component/CardMultiple'
 import ReadNews from '../_component/ReadNews'
+import NewsService from '../_services/NewsService'
 
-export default class DetailPage extends Component {
+interface IProps extends ISlugProps {}
+
+interface IState {
+  data?: INewsDTO
+}
+
+export default class DetailPage extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props)
+    this.state = {}
+  }
+
+  fetchDetail = async (id: string) => {
+    // console.log('news id: ', id)
+    const res = await NewsService.detail(id)
+    if (!res) return
+    this.setState({ data: res })
+  }
+
+  componentDidMount(): void {
+    const { slug } = this.props.params
+    this.fetchDetail(slug)
+  }
+
   render() {
-    console.log(this.props)
+    // console.log(this.props)
 
     return (
       <Container>
         <Grid container spacing={2} sx={{ pt: '18px', pb: '56px' }}>
           <Grid item xs={9}>
-            <ReadNews />
+            <ReadNews data={this.state.data} />
           </Grid>
           <Grid item xs={3}>
             <CardMultiple />

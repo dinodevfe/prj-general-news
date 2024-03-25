@@ -1,3 +1,9 @@
+export * from './NavigationKeys'
+
+export interface ISlugProps {
+  params: { slug: string }
+}
+
 export interface INewsDTO {
   id: string
   title: string

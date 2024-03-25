@@ -3,10 +3,15 @@ import React, { Component } from 'react'
 import { Box, Stack, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import PicDefault from '../../../images/image-default.jpg'
-import SourceDefault from '../../../images/source-logo.jpg'
+import PicDefault from '@/images/image-default.jpg'
+import SourceDefault from '@/images/source-logo.jpg'
+import { INewsDTO } from '@/models'
 
-export default class CardBasic extends Component {
+interface IProps {
+  data?: INewsDTO
+}
+
+export default class CardBasic extends Component<IProps> {
   render() {
     return (
       <Box sx={{ width: '100%', pb: '100%', position: 'relative' }}>

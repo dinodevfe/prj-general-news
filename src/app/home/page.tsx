@@ -6,6 +6,7 @@ import CardTrends from './_component/CardTrends'
 import CardWelcome from './_component/CardWelcome'
 import CardCarousel from './_component/CardCarousel'
 import CardMultiple from './_component/CardMultiple'
+import { INewsDTO } from '@/models'
 
 // type TCardType = 'basic' | ''
 
@@ -31,7 +32,28 @@ const Config: IConfig[] = [
   { size: 3, component: <CardBasic /> }
 ]
 
-export default class HomePage extends Component {
+interface IProps {}
+interface IState {
+  data: INewsDTO[]
+}
+
+export default class HomePage extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props)
+    this.state = { data: [] }
+  }
+
+  fetchData = async () => {
+    const res = await fetch('/api/news')
+    if (!res.ok) return
+    const data = await res.json()
+    this.setState({ data })
+  }
+
+  componentDidMount(): void {
+    this.fetchData()
+  }
+
   render() {
     return (
       <Wrapper>

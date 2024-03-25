@@ -4,6 +4,7 @@ import { INewsDTO } from '@/models'
 import { Box, Divider, Stack, Typography, styled } from '@mui/material'
 import BasicNewsInfo from '@/components/BasicNewsInfo'
 import MoreInfo from './MoreInfo'
+import { ContentSkeleton } from './Skeleton'
 
 const DATA: INewsDTO = {
   id: '0',
@@ -15,18 +16,27 @@ const DATA: INewsDTO = {
   createdDate: '2024-03-04T02:13:48.822Z'
 }
 
-export default class ReadNews extends Component {
+interface IProps {
+  data?: INewsDTO
+}
+
+export default class ReadNews extends Component<IProps> {
   render() {
     return (
       <Wrapper>
-        <Typography variant='h5'>{DATA.title}</Typography>
+        <Typography variant='h5'>{this.props.data?.title ?? 'Title'}</Typography>
         <BasicNewsInfo data={{ title: DATA.sourceTitle, author: DATA.author, createdDate: DATA.createdDate }} />
         <Divider flexItem />
-        <Typography>{DATA.content}</Typography>
+        {this.renderContent()}
         <Divider flexItem />
         <MoreInfo />
       </Wrapper>
     )
+  }
+
+  renderContent = () => {
+    if (!this.props.data) return <ContentSkeleton />
+    return <Typography>{this.props.data?.content ?? 'Content'}</Typography>
   }
 }
 
