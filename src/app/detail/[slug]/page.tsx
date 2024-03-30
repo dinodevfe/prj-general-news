@@ -1,12 +1,12 @@
 'use client'
 import React, { Component } from 'react'
-import { INewsDTO, ISlugProps } from '@/models'
+import { INewsDTO, ISlug } from '@/models'
 import { Container, Grid } from '@mui/material'
 import CardMultiple from '../_component/CardMultiple'
 import ReadNews from '../_component/ReadNews'
 import NewsService from '../_services/NewsService'
 
-interface IProps extends ISlugProps {}
+interface IProps extends ISlug {}
 
 interface IState {
   data?: INewsDTO

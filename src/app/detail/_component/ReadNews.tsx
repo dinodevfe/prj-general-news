@@ -6,16 +6,6 @@ import BasicNewsInfo from '@/components/BasicNewsInfo'
 import MoreInfo from './MoreInfo'
 import { ContentSkeleton } from './Skeleton'
 
-const DATA: INewsDTO = {
-  id: '0',
-  title: `Donec eleif imperdiet quam ipsum, nec varius uted nied`,
-  sourceTitle: 'News',
-  sourceUrl: 'http://source-news-example.com',
-  author: 'Author',
-  content: '123',
-  createdDate: '2024-03-04T02:13:48.822Z'
-}
-
 interface IProps {
   data?: INewsDTO
 }
@@ -25,7 +15,7 @@ export default class ReadNews extends Component<IProps> {
     return (
       <Wrapper>
         <Typography variant='h5'>{this.props.data?.title ?? 'Title'}</Typography>
-        <BasicNewsInfo data={{ title: DATA.sourceTitle, author: DATA.author, createdDate: DATA.createdDate }} />
+        <BasicNewsInfo data={this.props.data} />
         <Divider flexItem />
         {this.renderContent()}
         <Divider flexItem />
@@ -36,7 +26,7 @@ export default class ReadNews extends Component<IProps> {
 
   renderContent = () => {
     if (!this.props.data) return <ContentSkeleton />
-    return <Typography>{this.props.data?.content ?? 'Content'}</Typography>
+    return <Typography dangerouslySetInnerHTML={{ __html: this.props.data?.content ?? 'Content' }}></Typography>
   }
 }
 

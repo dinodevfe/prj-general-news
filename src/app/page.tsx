@@ -1,7 +1,10 @@
 'use client'
 import React, { FC, useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Box, Container, Stack } from '@mui/material'
+import { Box, Container, Grid, Stack } from '@mui/material'
+import ImageLoader from '@/components/ImageLoader'
+import CardMultiple from './home/_component/CardMultiple'
+import SkeletonCardCarousel from './home/_component/CardCarousel/Skeleton'
 
 const Home: FC = () => {
   const router = useRouter()
@@ -59,7 +62,13 @@ const Home: FC = () => {
 
   return (
     <Container>
-      <Stack sx={{ gap: '50px', py: '56px' }}>
+      {/* <ImageLoader /> */}
+      <Grid container sx={{ my: '24px' }}>
+        <Grid item xs={6}>
+          <SkeletonCardCarousel />
+        </Grid>
+      </Grid>
+      {/* <Stack sx={{ gap: '50px', py: '56px' }}>
         <Box className='partial-item' sx={{ width: '100%', height: '120vh', backgroundColor: 'red' }}>
           Block 0
         </Box>
@@ -72,7 +81,7 @@ const Home: FC = () => {
         <Box className='partial-item' sx={{ width: '100%', height: '120vh', backgroundColor: 'blueviolet' }}>
           Block 3
         </Box>
-      </Stack>
+      </Stack> */}
     </Container>
   )
 }

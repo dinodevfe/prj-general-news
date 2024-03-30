@@ -16,6 +16,7 @@
     "@mui/material": "^5.15.11",
     "@reduxjs/toolkit": "^2.2.1",
     "next": "14.1.0",
+    "partner-library-mfe": "github:dinodevfe/partner-library-mfe",
     "react": "^18",
     "react-dom": "^18",
     "react-redux": "^9.1.0",

@@ -1,19 +1,22 @@
 'use client'
 import React, { Component } from 'react'
+import { INewsDTO } from '@/models'
 import { Box, Stack, Typography, styled } from '@mui/material'
 import Image from 'next/image'
+import PicDefault from '@/images/image-default.jpg'
+import SourceDefault from '@/images/source-logo.jpg'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import PicDefault from '../../../../images/image-default.jpg'
-import SourceDefault from '../../../../images/source-logo.jpg'
 
-export default class Item extends Component {
+interface IProps {
+  data: INewsDTO
+}
+
+export default class Item extends Component<IProps> {
   render() {
     return (
       <Box>
         <Wrapper>
-          <ImageWrapper>
-            <Image alt='pic' src={PicDefault} />
-          </ImageWrapper>
+          <ImageWrapper>{this.renderImage()}</ImageWrapper>
           <Shadow />
           <Stack sx={{ gap: '6px', padding: '9px', position: 'absolute', bottom: '28px', left: 0, width: '100%' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -21,7 +24,7 @@ export default class Item extends Component {
                 <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </AvatarSource>
               <Typography variant='caption' sx={{ color: '#f7f7f7' }}>
-                Source title
+                {this.props.data?.sourceTitle ?? 'Source title'}
               </Typography>
               <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#f7f7f7' }} />
               <Typography variant='caption' sx={{ color: '#f7f7f7' }}>
@@ -29,19 +32,26 @@ export default class Item extends Component {
               </Typography>
             </Box>
             <Typography variant='h6' sx={{ color: '#fff' }}>
-              Title
+              {this.props.data?.title ?? 'Title'}
             </Typography>
           </Stack>
         </Wrapper>
       </Box>
     )
   }
+
+  renderImage = () => {
+    if (!this.props.data) {
+      return <Image alt='pic' src={PicDefault} />
+    }
+    return <Box component='img' alt='source-logo' src={this.props.data.imageUrl} />
+  }
 }
 
 const Wrapper = styled(Box)({
   width: 'calc(100% - 6px)',
-  margin: 'auto',
   paddingBottom: 'calc(50% - 8px)',
+  margin: 'auto',
   position: 'relative',
   borderRadius: '6px',
   backgroundColor: '#fff',

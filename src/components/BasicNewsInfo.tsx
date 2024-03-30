@@ -1,19 +1,14 @@
 'use client'
 import React, { Component } from 'react'
+import { INewsDTO } from '@/models'
 import { formatTimeAgo } from '@/helpers'
 import { Box, Typography, styled } from '@mui/material'
 import Image from 'next/image'
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import SourceDefault from '@/images/source-logo.jpg'
-
-interface IInfo {
-  title: string
-  createdDate: string
-  author?: string
-}
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 
 interface IProps {
-  data: IInfo
+  data?: INewsDTO
 }
 
 export default class BasicNewsInfo extends Component<IProps> {
@@ -24,25 +19,24 @@ export default class BasicNewsInfo extends Component<IProps> {
           <Image alt='source-logo' src={SourceDefault} />
         </AvatarSource>
         <Typography variant='caption' sx={{ color: '#767676' }}>
-          {this.props.data.title}
+          {this.props.data?.title ?? 'Title'}
         </Typography>
         {this.renderAuthor()}
         <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
         <Typography variant='caption' sx={{ color: '#767676' }}>
-          {formatTimeAgo(this.props.data.createdDate)}
+          {this.props.data && formatTimeAgo(this.props.data.createdDate)}
         </Typography>
       </Box>
     )
   }
 
   renderAuthor = () => {
-    const { author } = this.props.data
-    if (!author) return <></>
+    if (!this.props.data?.author) return <></>
     return (
       <>
         <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
         <Typography variant='caption' sx={{ color: '#767676' }}>
-          {author}
+          {this.props.data.author}
         </Typography>
       </>
     )

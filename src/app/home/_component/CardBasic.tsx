@@ -1,11 +1,13 @@
 'use client'
-import React, { Component } from 'react'
-import { Box, Stack, Typography, styled } from '@mui/material'
+import React, { Component, FC } from 'react'
+import { formatTimeAgo } from '@/helpers'
+import { INewsDTO, NavigationKeys } from '@/models'
+import { Box, Skeleton, Stack, Typography, styled } from '@mui/material'
+import Link from 'next/link'
 import Image from 'next/image'
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import PicDefault from '@/images/image-default.jpg'
 import SourceDefault from '@/images/source-logo.jpg'
-import { INewsDTO } from '@/models'
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 
 interface IProps {
   data?: INewsDTO
@@ -13,32 +15,52 @@ interface IProps {
 
 export default class CardBasic extends Component<IProps> {
   render() {
+    if (!this.props.data) return <SkeletonCard />
     return (
       <Box sx={{ width: '100%', pb: '100%', position: 'relative' }}>
-        <Wrapper>
-          <ImageWrapper>
-            <Image alt='pic' src={PicDefault} />
-          </ImageWrapper>
+        <Wrapper {...{ component: Link, href: this.getHref(this.props.data.id), target: '_blank' }}>
+          <ImageWrapper>{this.renderImage()}</ImageWrapper>
           <Stack sx={{ gap: '6px', padding: '9px' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <AvatarSource>
                 <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </AvatarSource>
               <Typography variant='caption' sx={{ color: '#767676' }}>
-                Source title
+                {this.props.data.sourceTitle}
               </Typography>
               <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
               <Typography variant='caption' sx={{ color: '#767676' }}>
-                Time ago
+                {formatTimeAgo(this.props.data.createdDate)}
               </Typography>
             </Box>
-            <Typography variant='h6'>Title</Typography>
+            <Title variant='h6'>{this.props.data.title}</Title>
           </Stack>
         </Wrapper>
       </Box>
     )
   }
+
+  getHref = (id: string) => `${NavigationKeys.Detail}/${id}`
+
+  renderImage = () => {
+    if (!this.props.data) {
+      return <Image alt='pic' src={PicDefault} />
+    }
+    return <Box className='img-article' component='img' alt='source-logo' src={this.props.data.imageUrl} />
+  }
 }
+
+const SkeletonCard: FC = () => (
+  <Box sx={{ width: '100%', pb: '100%', position: 'relative' }}>
+    <Wrapper>
+      <Skeleton variant='rectangular' width='100%' height='50%' />
+      <Stack sx={{ gap: '6px', padding: '9px' }}>
+        <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
+        <Skeleton variant='rounded' width='100%' height={60} />
+      </Stack>
+    </Wrapper>
+  </Box>
+)
 
 const Wrapper = styled(Box)({
   borderRadius: '6px',
@@ -48,7 +70,14 @@ const Wrapper = styled(Box)({
   height: '100%',
   width: '100%',
   top: 0,
-  left: 0
+  left: 0,
+  cursor: 'pointer',
+  textDecoration: 'unset',
+  color: '#000',
+  overflow: 'hidden',
+  '&:hover .img-article': {
+    transform: 'scale(1.05)'
+  }
 })
 
 const AvatarSource = styled(Box)({
@@ -60,9 +89,20 @@ const AvatarSource = styled(Box)({
 
 const ImageWrapper = styled(Box)({
   height: '50%',
+  overflow: 'hidden',
   '& > img': {
     objectFit: 'cover',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    transform: 'scale(1)',
+    transition: 'all 0.3s'
   }
+})
+
+const Title = styled(Typography)({
+  display: '-webkit-box',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: 'vertical'
 })

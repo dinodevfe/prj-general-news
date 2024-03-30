@@ -1,16 +1,23 @@
 'use client'
-import React, { Component } from 'react'
-import { Box, Button, Stack, Typography, styled } from '@mui/material'
+import React, { Component, FC } from 'react'
+import { INewsDTO } from '@/models'
+import { formatTimeAgo } from '@/helpers'
+import { Box, Button, Skeleton, Stack, Typography, styled } from '@mui/material'
 import Image from 'next/image'
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import PicDefault from '@/images/image-default.jpg'
 import SourceDefault from '@/images/source-logo.jpg'
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 
-export default class CardHorizontal extends Component {
+interface IProps {
+  data?: INewsDTO
+}
+
+export default class CardHorizontal extends Component<IProps> {
   render() {
+    if (!this.props.data) return <></>
     return (
       <Wrapper>
-        <Image alt='pic' src={PicDefault} style={{ height: '100%', width: 'auto' }} />
+        {this.renderImage()}
         <Stack sx={{ flex: 1, padding: '0 18px' }}>
           <Box sx={{ flex: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -18,17 +25,14 @@ export default class CardHorizontal extends Component {
                 <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </AvatarSource>
               <Typography variant='caption' sx={{ color: '#767676' }}>
-                Source title
+                {this.props.data.sourceTitle}
               </Typography>
               <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
               <Typography variant='caption' sx={{ color: '#767676' }}>
-                Time ago
+                {formatTimeAgo(this.props.data.createdDate)}
               </Typography>
             </Box>
-            <Title>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rhoncus purus a magna congue hendrerit sed sit amet
-              tortor. Aenean eget sapien eu velit molestie imperdiet a quis nisl. Praesent gravida eget nulla eu molestie.
-            </Title>
+            <Title>{this.props.data.title}</Title>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button variant='outlined' color='inherit' size='small'>
@@ -39,6 +43,30 @@ export default class CardHorizontal extends Component {
       </Wrapper>
     )
   }
+
+  renderImage = () => {
+    if (!this.props.data) {
+      return <Image alt='pic' src={PicDefault} style={{ height: '100%', width: 'auto' }} />
+    }
+    return <Box component='img' alt='source-logo' src={this.props.data.imageUrl} style={{ height: '100%', width: 'auto' }} />
+  }
+}
+
+const SkeletonCard: FC = () => {
+  return (
+    <Wrapper>
+      <Skeleton variant='rounded' width={160} height='100%' />
+      <Box sx={{ flex: 1, padding: '0 18px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <Skeleton variant='text' sx={{ fontSize: '1rem', width: '128px' }} />
+          <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
+          <Skeleton variant='text' sx={{ fontSize: '1rem', width: '76px' }} />
+        </Box>
+        <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
+        <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
+      </Box>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled(Box)({

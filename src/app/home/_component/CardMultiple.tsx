@@ -1,48 +1,27 @@
 'use client'
-import React, { Component } from 'react'
-import { Box, Stack, Typography, styled } from '@mui/material'
+import React, { Component, FC } from 'react'
+import { INewsDTO } from '@/models'
+import { Box, Skeleton, Stack, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import SourceDefault from '../../../images/source-logo.jpg'
+import SourceDefault from '@/images/source-logo.jpg'
+import { formatTimeAgo } from '@/helpers'
 
-const initialData = (max = 3) => {
-  const list: string[] = [
-    'Mauris ut mi sit amet augue facilisis laoreet eu eu nisl. Aliquam erat volutpat. Integer enim diam, mattis et leo ut, dignissim tristique tellus. Praesent imperdiet risus quam, nec luctus nisi viverra sed.',
-    'Ut rhoncus, augue ut ornare lacinia, nunc enim semper velit, non bibendum diam dolor eget augue.',
-    'Aenean a ante arcu. Morbi dictum diam nec ex dignissim consectetur. Praesent eget dignissim lectus.'
-  ]
-  return list
+interface IProps {
+  data: INewsDTO[]
 }
 
-export default class CardMultiple extends Component {
+export default class CardMultiple extends Component<IProps> {
   render() {
-    const ITEMS = initialData()
     return (
       <Box sx={{ width: '100%', pb: '100%', position: 'relative' }}>
         <Wrapper>
           <Box>
             <Typography sx={{ fontWeight: 'bold' }}>Tin tức hàng đầu</Typography>
           </Box>
-          <Box sx={{ flex: 1 }}>
-            {ITEMS.map((item, index) => (
-              <Box key={index} sx={{ mt: '4px' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <AvatarSource>
-                    <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </AvatarSource>
-                  <Typography variant='caption' sx={{ color: '#767676' }}>
-                    Source title
-                  </Typography>
-                  <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
-                  <Typography variant='caption' sx={{ color: '#767676' }}>
-                    Time ago
-                  </Typography>
-                </Box>
-                <Title>{item}</Title>
-              </Box>
-            ))}
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Box sx={{ flex: 1 }}>{this.renderItems()}</Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            {this.renderDots()}
             <Typography variant='caption' sx={{ color: '#0078D4' }}>
               Xem thêm
             </Typography>
@@ -51,6 +30,58 @@ export default class CardMultiple extends Component {
       </Box>
     )
   }
+
+  renderItems = () => {
+    const data = this.props.data.slice(0, 3)
+    if (data.length < 1) return <SkeletonCard />
+    return data.map((item, index) => (
+      <Box key={index} sx={{ mt: '4px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <AvatarSource>
+            <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </AvatarSource>
+          <Typography variant='caption' sx={{ color: '#767676' }}>
+            {item.sourceTitle ?? 'Unknown'}
+          </Typography>
+          <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
+          <Typography variant='caption' sx={{ color: '#767676' }}>
+            {formatTimeAgo(item.createdDate)}
+          </Typography>
+        </Box>
+        <Title>{item.title ?? 'Title'}</Title>
+      </Box>
+    ))
+  }
+
+  renderDots = () => {
+    return (
+      <Box component='ul' sx={{ display: 'flex' }}>
+        <Box component='li'>
+          <FiberManualRecordIcon sx={{ width: '0.3em', height: '0.3em', color: '#767676' }} />
+        </Box>
+        <Box component='li'>
+          <FiberManualRecordIcon sx={{ width: '0.3em', height: '0.3em', color: '#767676' }} />
+        </Box>
+        <Box component='li'>
+          <FiberManualRecordIcon sx={{ width: '0.3em', height: '0.3em', color: '#767676' }} />
+        </Box>
+      </Box>
+    )
+  }
+}
+
+const SkeletonCard: FC = () => {
+  return [...Array(3)].map((e, i) => (
+    <Box key={i} sx={{ mt: '9px' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+        <Skeleton variant='text' sx={{ fontSize: '1rem', width: '128px' }} />
+        <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
+        <Skeleton variant='text' sx={{ fontSize: '1rem', width: '76px' }} />
+      </Box>
+      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
+      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
+    </Box>
+  ))
 }
 
 const Wrapper = styled(Stack)({

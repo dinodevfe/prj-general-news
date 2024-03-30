@@ -1,4 +1,5 @@
-export const formatTimeAgo = (value: string): string => {
+export const formatTimeAgo = (value?: string): string => {
+  if (!value) return 'Unknown'
   let date = value
   if (!date.includes('Z')) date = `${date}Z`
   const targetDate = new Date(date)
@@ -10,7 +11,9 @@ export const formatTimeAgo = (value: string): string => {
   const hours: number = Math.floor(minutes / 60)
   const days: number = Math.floor(hours / 24)
 
-  if (seconds < 60) {
+  if (seconds < 0) {
+    return `0 seconds ago`
+  } else if (seconds < 60) {
     return `${seconds} seconds ago`
   } else if (minutes < 60) {
     return `${minutes} minutes ago`
