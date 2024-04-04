@@ -4,13 +4,13 @@ import { deleteFolderByName, getAllSubdirectories, getInfoArticle } from './file
 import path from 'path'
 
 export const GET = async () => {
-  const dirPath = 'F:\\docker-services\\volumes\\news-results\\news'
+  const dirPath = 'F:\\docker-services\\volumes\\news-results-v2\\news'
   const news = getAllSubdirectories(dirPath)
-  const data = news.map((item, index) => {
+  const data = news.map((item) => {
     const articlePath = path.join(dirPath, item)
     return getInfoArticle(articlePath)
   })
-  return new Response(JSON.stringify({ news, data }))
+  return new Response(JSON.stringify(data))
 
   // const newsContent = getInfoArticle('F:\\docker-services\\volumes\\news-results\\news\\_4711046')
   // return new Response(JSON.stringify(newsContent))

@@ -1,12 +1,12 @@
 'use client'
 import React, { Component } from 'react'
-import { INewsDTO } from '@/models'
+import { IArticleDTO } from '@/models'
 import { Container, styled } from '@mui/material'
 import Content from './_component/Content'
 
 interface IProps {}
 interface IState {
-  data: INewsDTO[]
+  data: IArticleDTO[]
 }
 
 export default class HomePage extends Component<IProps, IState> {

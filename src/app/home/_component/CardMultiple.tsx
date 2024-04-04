@@ -1,6 +1,6 @@
 'use client'
 import React, { Component, FC } from 'react'
-import { INewsDTO } from '@/models'
+import { IArticleDTO } from '@/models'
 import { Box, Skeleton, Stack, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
@@ -8,7 +8,7 @@ import SourceDefault from '@/images/source-logo.jpg'
 import { formatTimeAgo } from '@/helpers'
 
 interface IProps {
-  data: INewsDTO[]
+  data: IArticleDTO[]
 }
 
 export default class CardMultiple extends Component<IProps> {

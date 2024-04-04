@@ -6,7 +6,7 @@ export interface ISlug {
 
 export type TNewsType = 'nomal' | 'hot' | 'carousel'
 
-export interface INewsDTO {
+export interface IArticleDTO {
   id: string
   title: string
   author: string
@@ -19,4 +19,18 @@ export interface INewsDTO {
   type?: TNewsType
 }
 
-export interface IConfig {}
+interface IContentBase {
+  text: string
+  type?: 'text' | 'img'
+}
+
+interface IContentText extends IContentBase {
+  type: 'text'
+}
+
+interface IContentImage extends IContentBase {
+  type: 'img'
+  sub: string
+}
+
+export type TContent = IContentText | IContentImage

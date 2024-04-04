@@ -20,6 +20,9 @@ dependencies:
   '@mui/material':
     specifier: ^5.15.11
     version: 5.15.14(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)
+  '@mui/types':
+    specifier: ^7.2.14
+    version: 7.2.14(@types/react@18.2.73)
   '@reduxjs/toolkit':
     specifier: ^2.2.1
     version: 2.2.2(react-redux@9.1.0)(react@18.2.0)

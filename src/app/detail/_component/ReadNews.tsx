@@ -1,13 +1,13 @@
 'use client'
 import React, { Component } from 'react'
-import { INewsDTO } from '@/models'
+import { IArticleDTO } from '@/models'
 import { Box, Divider, Stack, Typography, styled } from '@mui/material'
 import BasicNewsInfo from '@/components/BasicNewsInfo'
 import MoreInfo from './MoreInfo'
 import { ContentSkeleton } from './Skeleton'
 
 interface IProps {
-  data?: INewsDTO
+  data?: IArticleDTO
 }
 
 export default class ReadNews extends Component<IProps> {

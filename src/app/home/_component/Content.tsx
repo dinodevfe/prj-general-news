@@ -1,6 +1,6 @@
 'use client'
 import React, { Component } from 'react'
-import { INewsDTO } from '@/models'
+import { IArticleDTO } from '@/models'
 import { Grid } from '@mui/material'
 import CardCarousel from './CardCarousel'
 import CardBasic from './CardBasic'
@@ -9,14 +9,14 @@ import CardWelcome from './CardWelcome'
 import CardMultiple from './CardMultiple'
 
 interface IList {
-  nomalIndexs: INewsDTO[]
-  nomals: INewsDTO[]
-  carousel: INewsDTO[]
-  hots: INewsDTO[]
+  nomalIndexs: IArticleDTO[]
+  nomals: IArticleDTO[]
+  carousel: IArticleDTO[]
+  hots: IArticleDTO[]
 }
 
 interface IProps {
-  data: INewsDTO[]
+  data: IArticleDTO[]
 }
 
 export default class Content extends Component<IProps> {

@@ -1,6 +1,6 @@
 'use client'
 import React, { Component } from 'react'
-import { INewsDTO } from '@/models'
+import { IArticleDTO } from '@/models'
 import { Box, Stack, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import PicDefault from '@/images/image-default.jpg'
@@ -8,7 +8,7 @@ import SourceDefault from '@/images/source-logo.jpg'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 
 interface IProps {
-  data: INewsDTO
+  data: IArticleDTO
 }
 
 export default class Item extends Component<IProps> {

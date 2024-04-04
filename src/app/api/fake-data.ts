@@ -1,4 +1,4 @@
-import { INewsDTO } from '@/models'
+import { IArticleDTO } from '@/models'
 import { faker } from '@faker-js/faker'
 
 const Tags = ['tin-tuc', 'the-thao', 'tai-chinh', 'goc-nhin']
@@ -9,7 +9,7 @@ const getRandomValueFromArray = (data: string[], defaultValue?: string) => {
   return data[randomIndex]
 }
 
-export const createOne = (index: number): INewsDTO => ({
+export const createOne = (index: number): IArticleDTO => ({
   id: index.toString(),
   title: faker.lorem.lines(1),
   author: faker.person.fullName(),
@@ -24,7 +24,7 @@ export const createOne = (index: number): INewsDTO => ({
 const initialData = (max: number = 100) => {
   let carouselCount = 18
   let hotNews = 9
-  const list: INewsDTO[] = []
+  const list: IArticleDTO[] = []
   for (let index = 0; index < max; index++) {
     const temp = createOne(index)
     if (carouselCount > 0) {
@@ -39,7 +39,7 @@ const initialData = (max: number = 100) => {
   return list
 }
 
-export const NewsListFake: INewsDTO[] = initialData()
+export const NewsListFake: IArticleDTO[] = initialData()
 // [
 //   {
 //     id: 'Id 0',

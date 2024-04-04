@@ -1,6 +1,6 @@
 'use client'
 import React, { Component } from 'react'
-import { INewsDTO, ISlug } from '@/models'
+import { IArticleDTO, ISlug } from '@/models'
 import { Container, Grid } from '@mui/material'
 import CardMultiple from '../_component/CardMultiple'
 import ReadNews from '../_component/ReadNews'
@@ -9,7 +9,7 @@ import NewsService from '../_services/NewsService'
 interface IProps extends ISlug {}
 
 interface IState {
-  data?: INewsDTO
+  data?: IArticleDTO
 }
 
 export default class DetailPage extends Component<IProps, IState> {

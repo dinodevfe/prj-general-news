@@ -1,7 +1,7 @@
 'use client'
 import React, { Component, FC } from 'react'
 import { formatTimeAgo } from '@/helpers'
-import { INewsDTO, NavigationKeys } from '@/models'
+import { IArticleDTO, NavigationKeys } from '@/models'
 import { Box, Skeleton, Stack, Typography, styled } from '@mui/material'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -10,7 +10,7 @@ import SourceDefault from '@/images/source-logo.jpg'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 
 interface IProps {
-  data?: INewsDTO
+  data?: IArticleDTO
 }
 
 export default class CardBasic extends Component<IProps> {

@@ -1,13 +1,13 @@
 'use client'
 import React, { Component, FC } from 'react'
-import { INewsDTO } from '@/models'
+import { IArticleDTO } from '@/models'
 import { Box, styled } from '@mui/material'
 import Slider, { CustomArrowProps, Settings } from 'react-slick'
 import Item from './Item'
 import SkeletonCardCarousel from './Skeleton'
 
 interface IProps {
-  data: INewsDTO[]
+  data: IArticleDTO[]
 }
 
 export default class CardCarousel extends Component<IProps> {

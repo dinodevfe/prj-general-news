@@ -1,6 +1,6 @@
 'use client'
 import React, { Component } from 'react'
-import { INewsDTO, ISlug } from '@/models'
+import { IArticleDTO, ISlug } from '@/models'
 import { Container, Grid, Stack, Typography } from '@mui/material'
 import TopicInfo from '../_component/TopicInfo'
 import CardMultiple from '../_component/CardMultiple'
@@ -12,7 +12,7 @@ import TopicService from '../_services/TopicService'
 interface IProps extends ISlug {}
 
 interface IState {
-  data: INewsDTO[]
+  data: IArticleDTO[]
 }
 
 export default class TopicPage extends Component<IProps, IState> {
