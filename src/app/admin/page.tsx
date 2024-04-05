@@ -78,5 +78,9 @@ export default class AdminPage extends Component<IProps, IState> {
 
   handleSubmitDelete = (data: IArticleDTO) => {
     ArticlesService.deleteOne(data.id)
+    const { articles } = this.state
+    this.setState({ articles: this.removeArticle(articles, data.id) })
   }
+
+  removeArticle = (list: IArticleDTO[], articleId: string) => list.filter((e) => e.id !== articleId)
 }

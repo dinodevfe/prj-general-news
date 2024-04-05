@@ -16,6 +16,7 @@
     "@mui/material": "^5.15.11",
     "@mui/types": "^7.2.14",
     "@reduxjs/toolkit": "^2.2.1",
+    "alloyeditor": "^2.14.10",
     "next": "14.1.0",
     "partner-library-mfe": "github:dinodevfe/partner-library-mfe",
     "react": "^18",

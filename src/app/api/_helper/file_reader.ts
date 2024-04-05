@@ -82,7 +82,7 @@ const getFileExtension = (url: string) => {
   return { name, extension }
 }
 
-const handleContent = (data: string[]) => {
+const handleContent = (data: string[], dirName: string) => {
   const regex = new RegExp(/\b(?:https?:\/\/|www\.)\S+\b/)
   const resultContent: { text: string; type?: string; sub?: string }[] = []
   let link: { text: string; type: string; sub: string } | null = null
@@ -91,7 +91,7 @@ const handleContent = (data: string[]) => {
     if (urls.length > 0) {
       const fExtentsion = getFileExtension(item)
       const text = fExtentsion ? fExtentsion.name + fExtentsion.extension : item
-      link = { text, type: 'img', sub: '' }
+      link = { text: `${dirName}\\${text}`, type: 'img', sub: '' }
     } else if (link !== null) {
       if (typeof link.sub !== 'undefined') {
         link.sub = item
@@ -112,7 +112,8 @@ interface IContent {
   content?: string
 }
 
-const getArticleContentByPath = (filePath: string) => {
+const getArticleContentByPath = (dirPath: string, fileName: string) => {
+  const filePath = path.join(dirPath, fileName)
   try {
     const data: IContent = {}
     const fileContent = fs.readFileSync(filePath, 'utf-8')
@@ -133,7 +134,7 @@ const getArticleContentByPath = (filePath: string) => {
         contents.push(line)
       }
     })
-    data.content = JSON.stringify(handleContent(contents))
+    data.content = JSON.stringify(handleContent(contents, dirPath))
     return data
   } catch (error) {
     console.error('Error processing .txt file:', filePath)
@@ -153,17 +154,11 @@ interface IInfo {
 }
 
 const filenameUnused = ['content.txt', 'info.txt']
-export const getInfoArticle = (folderPath: string) => {
-  // const files = getAllContents(folderPath)
-  // const images = files.filter((e) => !filenameUnused.some((item) => item === e))
-
+export const getInfoArticle = (folderPath: string): IArticleDTO => {
   const infoPath = path.join(folderPath, filenameUnused[1])
   const info: IInfo = readFileToJson(infoPath)
-
-  const contentPath = path.join(folderPath, filenameUnused[0])
-  const content = getArticleContentByPath(contentPath)
-
-  const data: IArticleDTO = {
+  const content = getArticleContentByPath(folderPath, filenameUnused[0])
+  return {
     id: info.id,
     createdDate: info.date_created_at,
     imageUrl: info.image,
@@ -174,7 +169,6 @@ export const getInfoArticle = (folderPath: string) => {
     sourceUrl: info.newspaper_origin_url,
     tag: ''
   }
-  return data
 }
 
 export const deleteFolderByName = (parentFolder: string, folderName: string) => {

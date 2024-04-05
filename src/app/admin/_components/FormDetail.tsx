@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { IArticleDTO, TContent } from '@/models'
-import { Box, Divider, IconButton, Paper, TextField, Typography, styled } from '@mui/material'
+import { Box, Divider, IconButton, Paper, Typography, styled } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption'
+import ContentViewer from './ContentViewer'
 
 interface IProps {
   data: IArticleDTO
@@ -23,40 +24,13 @@ export default class FormDetail extends Component<IProps> {
           </BtnClose>
         </Box>
         <Divider />
-        <Box>
+        <Content>
           <Typography variant='h6'>Title: {this.props.data.title}</Typography>
-          {/* <TextField id='outlined-basic' label='Outlined' variant='outlined' placeholder='Title' /> */}
           <Typography variant='h6'>Author: {this.props.data.author}</Typography>
-          {this.renderContent()}
-        </Box>
+          <ContentViewer data={this.props.data.content} />
+        </Content>
       </Wrapper>
     )
-  }
-
-  renderContent = () => {
-    const data = this.parseContent(this.props.data.content)
-    return (
-      <TextField
-        defaultValue={data.map((e) => e.text).join('\n')}
-        fullWidth
-        multiline
-        minRows={5}
-        label='Outlined'
-        variant='outlined'
-        placeholder='Content'
-      />
-    )
-  }
-
-  parseContent = (data?: string): TContent[] => {
-    try {
-      const res = JSON.parse(data ?? '[]')
-      if (Array.isArray(res)) return res
-      else return []
-    } catch (error) {
-      console.log(error)
-      return []
-    }
   }
 
   getTitle = () => {
@@ -72,6 +46,17 @@ const Wrapper = styled(Paper)(({ theme }) => ({
     width: theme.breakpoints.values.md
   }
 }))
+
+const Content = styled(Box)({
+  maxHeight: 'calc(100vh - 128px)',
+  overflow: 'auto',
+  padding: '0 12px',
+  margin: '0 -12px',
+  '::-webkit-scrollbar ': { width: '8px', boxShadow: 'unset' },
+  '::-webkit-scrollbar-track': { background: '#f1f1f1', borderRadius: '6px' },
+  '::-webkit-scrollbar-thumb': { background: '#c2c2c2', borderRadius: '6px' },
+  '::-webkit-scrollbar-thumb:hover': { background: '#818181' }
+})
 
 const BtnClose = styled(IconButton)({
   flex: '0 0 auto',
