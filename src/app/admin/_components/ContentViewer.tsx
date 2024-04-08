@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material'
 import React, { Component } from 'react'
 
 interface IProps {
+  articleId: string
   data: string
 }
 
@@ -12,7 +13,7 @@ export default class ContentViewer extends Component<IProps> {
     return (
       <Box>
         {contents.map((item, index) => (
-          <Item data={item} key={index} />
+          <Item articleId={this.props.articleId} data={item} key={index} />
         ))}
       </Box>
     )
@@ -20,18 +21,20 @@ export default class ContentViewer extends Component<IProps> {
 }
 
 interface IItemProps {
+  articleId: string
   data: TContent
 }
 
 class Item extends Component<IItemProps> {
   render() {
-    const { data } = this.props
+    const { data, articleId } = this.props
     switch (data.type) {
       case 'img':
+        const src = `/api/images/${articleId}/${data.text}`
         return (
           <Box>
             {/* <Typography variant='body1'>{data.text}</Typography> */}
-            <Box component='img' src={data.text} alt='picture' />
+            <Box component='img' src={src} alt='picture' sx={{ width: '85%', margin: 'auto', display: 'block' }} />
             <Typography variant='body2'>{data.sub}</Typography>
           </Box>
         )

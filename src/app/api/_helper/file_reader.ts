@@ -91,7 +91,8 @@ const handleContent = (data: string[], dirName: string) => {
     if (urls.length > 0) {
       const fExtentsion = getFileExtension(item)
       const text = fExtentsion ? fExtentsion.name + fExtentsion.extension : item
-      link = { text: `${dirName}\\${text}`, type: 'img', sub: '' }
+      // link = { text: `${dirName}\\${text}`, type: 'img', sub: '' }
+      link = { text: text, type: 'img', sub: '' }
     } else if (link !== null) {
       if (typeof link.sub !== 'undefined') {
         link.sub = item

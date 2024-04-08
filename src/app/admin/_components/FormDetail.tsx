@@ -27,7 +27,7 @@ export default class FormDetail extends Component<IProps> {
         <Content>
           <Typography variant='h6'>Title: {this.props.data.title}</Typography>
           <Typography variant='h6'>Author: {this.props.data.author}</Typography>
-          <ContentViewer data={this.props.data.content} />
+          <ContentViewer articleId={this.props.data.id} data={this.props.data.content} />
         </Content>
       </Wrapper>
     )
