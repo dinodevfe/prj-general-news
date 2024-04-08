@@ -5,18 +5,18 @@ const fomaterDate = (params?: any) => (params ? new Date(params).toLocaleString(
 
 export const CreateTable = () => {
   return CreateTableTemplate<IArticleDTO & { actions?: string }>('Client', {
-    getRowId: (x) => x.id,
+    getRowId: (x) => x.articleId,
     config: {
-      id: { flex: 1, type: 'string', headerName: 'Id' },
+      articleId: { type: 'string', headerName: 'Id' },
       title: { flex: 1, type: 'string', headerName: 'Title' },
-      sourceTitle: { flex: 1, type: 'string', headerName: 'Chanel' },
+      sourceTitle: { type: 'string', headerName: 'Chanel' },
       createdDate: {
-        flex: 1,
         minWidth: 190,
         type: 'string',
         headerName: 'Created date',
         valueFormatter: (param) => fomaterDate(param.value)
       },
+      status: { type: 'string', headerName: 'Status' },
       actions: { minWidth: 150, type: 'string', sortable: false, disableColumnMenu: true, headerName: 'Actions' }
     },
     filterOperators: MapOperators,

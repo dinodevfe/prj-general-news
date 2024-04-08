@@ -160,14 +160,16 @@ export const getInfoArticle = (folderPath: string): IArticleDTO => {
   const info: IInfo = readFileToJson(infoPath)
   const content = getArticleContentByPath(folderPath, filenameUnused[0])
   return {
-    id: info.id,
+    articleId: info.id,
     createdDate: info.date_created_at,
     imageUrl: info.image,
     title: content.title ?? '',
     author: content.author ?? '',
     content: content.content ?? '[]',
+    originUrl: info.url,
     sourceTitle: info.newspaper_origin,
     sourceUrl: info.newspaper_origin_url,
+    status: 'Pending',
     tag: ''
   }
 }

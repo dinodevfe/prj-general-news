@@ -18,7 +18,7 @@ export default class CardBasic extends Component<IProps> {
     if (!this.props.data) return <SkeletonCard />
     return (
       <Box sx={{ width: '100%', pb: '100%', position: 'relative' }}>
-        <Wrapper {...{ component: Link, href: this.getHref(this.props.data.id), target: '_blank' }}>
+        <Wrapper {...{ component: Link, href: this.getHref(this.props.data.articleId), target: '_blank' }}>
           <ImageWrapper>{this.renderImage()}</ImageWrapper>
           <Stack sx={{ gap: '6px', padding: '9px' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

@@ -10,7 +10,7 @@ const getRandomValueFromArray = (data: string[], defaultValue?: string) => {
 }
 
 export const createOne = (index: number): IArticleDTO => ({
-  id: index.toString(),
+  articleId: index.toString(),
   title: faker.lorem.lines(1),
   author: faker.person.fullName(),
   content: faker.lorem.paragraphs(10, '<br/>\n'),

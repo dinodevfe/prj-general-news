@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ISlug } from '@/models'
-import { deleteFolderByName, getAllSubdirectories, getInfoArticle } from './file_reader'
+import { deleteFolderByName, getAllSubdirectories, getInfoArticle } from '../_helper/file_reader'
 import path from 'path'
 import clientPromise from '@/lib/mongodb'
 import { Timestamp } from 'mongodb'
@@ -37,9 +37,8 @@ export const POST = async (request: NextRequest) => {
   try {
     const body = await request.json()
     const type = body.type
-    if (!type) {
-      return new Response(JSON.stringify({ error: 'No type' }), { status: 400 })
-    }
+    if (!type) return new Response(JSON.stringify({ error: 'No type' }), { status: 400 })
+
     const connector = await clientPromise
     const collection = connector.db('newspaper_project').collection('article_type')
     await collection.insertOne({ type })

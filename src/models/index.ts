@@ -6,15 +6,19 @@ export interface ISlug {
 
 export type TNewsType = 'nomal' | 'hot' | 'carousel'
 
+export type TArticleStatus = 'Pending' | 'Approve'
+
 export interface IArticleDTO {
-  id: string
+  articleId: string
   title: string
   author: string
   content: string
   imageUrl: string
+  originUrl: string
   sourceTitle: string
   sourceUrl: string
   createdDate: string
+  status: TArticleStatus
   tag?: string
   type?: TNewsType
 }

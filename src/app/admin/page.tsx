@@ -1,6 +1,7 @@
 'use client'
 import React, { Component } from 'react'
 import { IArticleDTO } from '@/models'
+import { AlertGlobal } from 'partner-library-mfe/components/AlertGlobal'
 import { TItemRowMenuRender } from 'partner-library-mfe/components/TableTemplate'
 import { GlobalModal, IGlobalModalContext, mapGlobalModalContext } from 'partner-library-mfe/components/GlobalModal'
 import { CreateTable } from './helper'
@@ -35,6 +36,7 @@ export default class AdminPage extends Component<IProps, IState> {
   render() {
     return (
       <GlobalModal>
+        <AlertGlobal />
         <Layout
           title='Article Manager'
           components={{
@@ -66,7 +68,7 @@ export default class AdminPage extends Component<IProps, IState> {
 
   handleClickDetail = (context: IGlobalModalContext, data: IArticleDTO) => {
     context.showModal({
-      content: () => <FormDetail data={data} onClose={context.closeModal} />
+      content: () => <FormDetail data={data} onClose={context.closeModal} onSubmit={this.handleSubmitApprove} />
     })
   }
 
@@ -77,10 +79,14 @@ export default class AdminPage extends Component<IProps, IState> {
   }
 
   handleSubmitDelete = (data: IArticleDTO) => {
-    ArticlesService.deleteOne(data.id)
+    ArticlesService.deleteOne(data.articleId)
     const { articles } = this.state
-    this.setState({ articles: this.removeArticle(articles, data.id) })
+    this.setState({ articles: this.removeArticle(articles, data.articleId) })
   }
 
-  removeArticle = (list: IArticleDTO[], articleId: string) => list.filter((e) => e.id !== articleId)
+  handleSubmitApprove = (data: IArticleDTO) => {
+    ArticlesService.approveArticle(data)
+  }
+
+  removeArticle = (list: IArticleDTO[], articleId: string) => list.filter((e) => e.articleId !== articleId)
 }

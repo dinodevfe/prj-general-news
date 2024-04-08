@@ -1,4 +1,5 @@
 import { IArticleDTO } from '@/models'
+import { ApiAlertContext } from 'partner-library-mfe/components/AlertGlobal'
 
 class ArticlesService {
   fetchAll = async (): Promise<IArticleDTO[]> => {
@@ -16,11 +17,28 @@ class ArticlesService {
       const res = await fetch('/api/news', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({id})
+        body: JSON.stringify({ id })
       })
-      if (res.ok) return true
-      return false
+      if (!res.ok) return false
+      ApiAlertContext.ApiAlert?.PushSuccess('Successfully deleted!')
+      return true
     } catch (error) {
+      ApiAlertContext.ApiAlert?.PushWarning('Delete failed!')
+      return false
+    }
+  }
+
+  approveArticle = async (param: IArticleDTO) => {
+    try {
+      const res = await fetch('/api/news', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(param)
+      })
+      if (!res.ok) new Error('Something wrong!')
+      ApiAlertContext.ApiAlert?.PushSuccess('Successfully approved!')
+    } catch (error) {
+      ApiAlertContext.ApiAlert?.PushWarning('Approve failed!')
       return false
     }
   }

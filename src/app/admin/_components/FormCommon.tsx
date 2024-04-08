@@ -31,7 +31,7 @@ export class FormDelete extends Component<IFormDeleteProps> {
   }
 
   getTitle = () => {
-    const { title, id } = this.props.data
+    const { title, articleId: id } = this.props.data
     console.log(typeof title)
     if (title !== '') return title
     return id

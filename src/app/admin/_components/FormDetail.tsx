@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { IArticleDTO, TContent } from '@/models'
-import { Box, Divider, IconButton, Paper, Typography, styled } from '@mui/material'
+import { Box, Button, Divider, IconButton, Paper, Typography, styled } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption'
 import ContentViewer from './ContentViewer'
+import Link from 'next/link'
 
 interface IProps {
   data: IArticleDTO
   onClose?: () => void
+  onSubmit?: (data: IArticleDTO) => void
 }
 
 export default class FormDetail extends Component<IProps> {
@@ -25,22 +27,47 @@ export default class FormDetail extends Component<IProps> {
         </Box>
         <Divider />
         <Content>
-          <Typography variant='h6'>Title: {this.props.data.title}</Typography>
-          <Typography variant='h6'>Author: {this.props.data.author}</Typography>
-          <ContentViewer articleId={this.props.data.id} data={this.props.data.content} />
+          <Typography variant='h5' sx={{ m: '12px 0 18px' }}>
+            {this.props.data.title}
+          </Typography>
+          <ContentViewer data={this.props.data} />
+          <Divider sx={{ my: '6px' }} />
+          <Box sx={{ display: 'flex' }}>
+            <Typography variant='body1' sx={{ mr: '3px' }}>
+              Link bài viết góc
+            </Typography>
+            {this.props.data.originUrl && (
+              <Link href={this.props.data.originUrl} target='_blank'>
+                tại đây
+              </Link>
+            )}
+            <Box sx={{ flex: 1 }} />
+            <Typography variant='body1'>{this.props.data.author}</Typography>
+          </Box>
+          <Box sx={{ height: '128px' }} />
         </Content>
+        <Divider />
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', py: '6px' }}>
+          <Button variant='contained' onClick={this.onSubmit}>
+            Approve
+          </Button>
+        </Box>
       </Wrapper>
     )
   }
 
+  onSubmit = () => {
+    this.props.onSubmit && this.props.onSubmit(this.props.data)
+  }
+
   getTitle = () => {
-    const { id, title, sourceTitle } = this.props.data
+    const { articleId: id, title, sourceTitle } = this.props.data
     return `[${sourceTitle}] ${id} ${title ? ' - ' + title : 'No name'}`
   }
 }
 
 const Wrapper = styled(Paper)(({ theme }) => ({
-  padding: '12px 12px 18px',
+  padding: '12px 12px 0',
   width: 'calc(100vw - 24px)',
   [theme.breakpoints.up('md')]: {
     width: theme.breakpoints.values.md
@@ -48,7 +75,7 @@ const Wrapper = styled(Paper)(({ theme }) => ({
 }))
 
 const Content = styled(Box)({
-  maxHeight: 'calc(100vh - 128px)',
+  maxHeight: 'calc(100vh - 184px)',
   overflow: 'auto',
   padding: '0 12px',
   margin: '0 -12px',
