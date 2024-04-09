@@ -2,9 +2,9 @@ import { IArticleDTO } from '@/models'
 import { ApiAlertContext } from 'partner-library-mfe/components/AlertGlobal'
 
 class ArticlesService {
-  fetchAll = async (): Promise<IArticleDTO[]> => {
+  fetchRawData = async (): Promise<IArticleDTO[]> => {
     try {
-      const res = await fetch(`/api/news`)
+      const res = await fetch(`/api/raw-data`)
       if (!res.ok) return []
       return await res.json()
     } catch (error) {
@@ -12,7 +12,23 @@ class ArticlesService {
     }
   }
 
-  deleteOne = async (id: string): Promise<boolean> => {
+  deleteRaw = async (id: string): Promise<boolean> => {
+    try {
+      const res = await fetch('/api/raw-data', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      })
+      if (!res.ok) return false
+      ApiAlertContext.ApiAlert?.PushSuccess('Raw folder successfully deleted!')
+      return true
+    } catch (error) {
+      ApiAlertContext.ApiAlert?.PushWarning('Raw folder delete failed!')
+      return false
+    }
+  }
+
+  delete = async (id: string): Promise<boolean> => {
     try {
       const res = await fetch('/api/news', {
         method: 'DELETE',
@@ -28,7 +44,7 @@ class ArticlesService {
     }
   }
 
-  approveArticle = async (param: IArticleDTO) => {
+  approve = async (param: IArticleDTO) => {
     try {
       const res = await fetch('/api/news', {
         method: 'POST',

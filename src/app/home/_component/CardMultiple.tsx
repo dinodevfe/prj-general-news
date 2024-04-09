@@ -45,7 +45,7 @@ export default class CardMultiple extends Component<IProps> {
           </Typography>
           <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
           <Typography variant='caption' sx={{ color: '#767676' }}>
-            {formatTimeAgo(item.createdDate)}
+            {formatTimeAgo(item.dateApproved)}
           </Typography>
         </Box>
         <Title>{item.title ?? 'Title'}</Title>

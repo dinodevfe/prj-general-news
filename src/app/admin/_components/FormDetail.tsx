@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
-import { IArticleDTO, TContent } from '@/models'
+import { IArticleDTO } from '@/models'
 import { Box, Button, Divider, IconButton, Paper, Typography, styled } from '@mui/material'
+import GlobalModal, { IGlobalModalContext, mapGlobalModalContext } from 'partner-library-mfe/components/GlobalModal'
+import Link from 'next/link'
 import CloseIcon from '@mui/icons-material/Close'
 import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption'
+import { FormApprove, FormDelete } from './FormCommon'
 import ContentViewer from './ContentViewer'
-import Link from 'next/link'
 
 interface IProps {
   data: IArticleDTO
   onClose?: () => void
-  onSubmit?: (data: IArticleDTO) => void
+  onSubmit: (data: IArticleDTO) => void
+  onDelete: (data: IArticleDTO) => void
 }
 
 export default class FormDetail extends Component<IProps> {
@@ -27,8 +30,11 @@ export default class FormDetail extends Component<IProps> {
         </Box>
         <Divider />
         <Content>
-          <Typography variant='h5' sx={{ m: '12px 0 18px' }}>
+          <Typography variant='h5' sx={{ m: '12px 0 6px' }}>
             {this.props.data.title}
+          </Typography>
+          <Typography variant='body1' sx={{ m: '0 0 18px', color: '#767676' }}>
+            {this.props.data.description}
           </Typography>
           <ContentViewer data={this.props.data} />
           <Divider sx={{ my: '6px' }} />
@@ -47,17 +53,49 @@ export default class FormDetail extends Component<IProps> {
           <Box sx={{ height: '128px' }} />
         </Content>
         <Divider />
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', py: '6px' }}>
-          <Button variant='contained' onClick={this.onSubmit}>
-            Approve
-          </Button>
-        </Box>
+        <GlobalModal>{this.renderActions()}</GlobalModal>
       </Wrapper>
     )
   }
 
+  renderActions = () => {
+    return mapGlobalModalContext((context) => (
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', py: '6px', gap: '12px' }}>
+        <Button variant='contained' color='error' onClick={() => this.handleClickDelete(context)}>
+          Delete
+        </Button>
+        <Button
+          variant='contained'
+          onClick={() => this.handleClickApprove(context)}
+          disabled={this.props.data.status === 'Approve'}
+        >
+          Approve
+        </Button>
+      </Box>
+    ))
+  }
+
+  handleClickDelete = (context: IGlobalModalContext) => {
+    context.showModal({
+      content: () => <FormDelete data={this.props.data} onClose={context.closeModal} onSubmit={this.onDelete} />
+    })
+  }
+
+  handleClickApprove = (context: IGlobalModalContext) => {
+    context.showModal({
+      content: () => <FormApprove data={this.props.data} onClose={context.closeModal} onSubmit={this.onSubmit} />
+    })
+  }
+
+  onDelete = () => {
+    this.props.onDelete(this.props.data)
+    this.props.onClose && this.props.onClose()
+  }
+
   onSubmit = () => {
-    this.props.onSubmit && this.props.onSubmit(this.props.data)
+    if (this.props.data.status === 'Approve') return
+    this.props.onSubmit(this.props.data)
+    this.props.onClose && this.props.onClose()
   }
 
   getTitle = () => {
@@ -69,9 +107,8 @@ export default class FormDetail extends Component<IProps> {
 const Wrapper = styled(Paper)(({ theme }) => ({
   padding: '12px 12px 0',
   width: 'calc(100vw - 24px)',
-  [theme.breakpoints.up('md')]: {
-    width: theme.breakpoints.values.md
-  }
+  [theme.breakpoints.up('md')]: { width: theme.breakpoints.values.md }
+  // [theme.breakpoints.up('lg')]: { width: theme.breakpoints.values.lg },
 }))
 
 const Content = styled(Box)({

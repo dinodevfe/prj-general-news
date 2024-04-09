@@ -30,7 +30,7 @@ export default class CardBasic extends Component<IProps> {
               </Typography>
               <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
               <Typography variant='caption' sx={{ color: '#767676' }}>
-                {formatTimeAgo(this.props.data.createdDate)}
+                {formatTimeAgo(this.props.data.dateApproved)}
               </Typography>
             </Box>
             <Title variant='h6'>{this.props.data.title}</Title>
@@ -43,10 +43,10 @@ export default class CardBasic extends Component<IProps> {
   getHref = (id: string) => `${NavigationKeys.Detail}/${id}`
 
   renderImage = () => {
-    if (!this.props.data) {
-      return <Image alt='pic' src={PicDefault} />
-    }
-    return <Box className='img-article' component='img' alt='source-logo' src={this.props.data.imageUrl} />
+    const { data } = this.props
+    if (!data) return <Image alt='pic' src={PicDefault} />
+    const src = `/api/images/${data.articleId}/${data.imageUrl}`
+    return <Box className='img-article' component='img' alt='source-logo' src={src} />
   }
 }
 

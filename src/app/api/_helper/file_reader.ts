@@ -1,5 +1,5 @@
 // utils/readFiles.js
-import { IArticleDTO } from '@/models'
+import { EArticleStatus, IArticleDTO } from '@/models'
 import fs from 'fs'
 import path, { parse, basename, extname } from 'path'
 
@@ -160,17 +160,19 @@ export const getInfoArticle = (folderPath: string): IArticleDTO => {
   const info: IInfo = readFileToJson(infoPath)
   const content = getArticleContentByPath(folderPath, filenameUnused[0])
   return {
+    id: '',
     articleId: info.id,
-    createdDate: info.date_created_at,
     imageUrl: info.image,
     title: content.title ?? '',
+    description: content.description,
     author: content.author ?? '',
     content: content.content ?? '[]',
     originUrl: info.url,
     sourceTitle: info.newspaper_origin,
     sourceUrl: info.newspaper_origin_url,
-    status: 'Pending',
-    tag: ''
+    dateRawCrawled: info.date_created_at,
+    tag: info.article_type,
+    status: EArticleStatus.Pending
   }
 }
 

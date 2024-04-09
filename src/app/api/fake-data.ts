@@ -15,7 +15,7 @@ export const createOne = (index: number): IArticleDTO => ({
   author: faker.person.fullName(),
   content: faker.lorem.paragraphs(10, '<br/>\n'),
   imageUrl: faker.image.url(),
-  createdDate: faker.date.recent().toString(),
+  dateApproved: faker.date.recent().toString(),
   sourceTitle: 'vnexpress',
   sourceUrl: 'http://newspaper.example.com/',
   tag: getRandomValueFromArray(Tags, Tags[0])

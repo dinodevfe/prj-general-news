@@ -29,7 +29,7 @@ export default class CardHorizontal extends Component<IProps> {
               </Typography>
               <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
               <Typography variant='caption' sx={{ color: '#767676' }}>
-                {formatTimeAgo(this.props.data.createdDate)}
+                {formatTimeAgo(this.props.data.dateApproved)}
               </Typography>
             </Box>
             <Title>{this.props.data.title}</Title>

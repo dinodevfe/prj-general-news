@@ -6,21 +6,33 @@ export interface ISlug {
 
 export type TNewsType = 'nomal' | 'hot' | 'carousel'
 
-export type TArticleStatus = 'Pending' | 'Approve'
+export enum EArticleStatus {
+  Pending = 'Pending',
+  Approve = 'Approve',
+  Error = 'Error',
+  Reject = 'Reject'
+}
 
 export interface IArticleDTO {
+  id: string
   articleId: string
   title: string
+  description?: string
   author: string
   content: string
   imageUrl: string
   originUrl: string
   sourceTitle: string
   sourceUrl: string
-  createdDate: string
-  status: TArticleStatus
+  dateApproved?: string
+  dateRawCrawled?: string
+  status: EArticleStatus
   tag?: string
   type?: TNewsType
+}
+
+export interface IArticleMongoDB extends IArticleDTO {
+  _id: string
 }
 
 interface IContentBase {

@@ -24,7 +24,7 @@ export default class BasicNewsInfo extends Component<IProps> {
         {this.renderAuthor()}
         <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
         <Typography variant='caption' sx={{ color: '#767676' }}>
-          {this.props.data && formatTimeAgo(this.props.data.createdDate)}
+          {this.props.data && formatTimeAgo(this.props.data.dateApproved)}
         </Typography>
       </Box>
     )
