@@ -4,7 +4,11 @@ export interface ISlug {
   params: { slug: string }
 }
 
-export type TNewsType = 'nomal' | 'hot' | 'carousel'
+export enum EArticleType {
+  Nomal = 'Nomal',
+  Hot = 'Hot',
+  Carousel = 'Carousel'
+}
 
 export enum EArticleStatus {
   Pending = 'Pending',
@@ -13,8 +17,7 @@ export enum EArticleStatus {
   Reject = 'Reject'
 }
 
-export interface IArticleDTO {
-  id: string
+interface IArticleBase {
   articleId: string
   title: string
   description?: string
@@ -27,11 +30,16 @@ export interface IArticleDTO {
   dateApproved?: string
   dateRawCrawled?: string
   status: EArticleStatus
+  index?: number
   tag?: string
-  type?: TNewsType
+  type?: EArticleType
 }
 
-export interface IArticleMongoDB extends IArticleDTO {
+export interface IArticleDTO extends IArticleBase {
+  id: string
+}
+
+export interface IArticleMongoDB extends IArticleBase {
   _id: string
 }
 

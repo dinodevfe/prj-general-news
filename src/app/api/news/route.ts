@@ -38,8 +38,19 @@ export const DELETE = async (request: NextRequest) => {
     await collection.deleteOne({ _id: new ObjectId(body.id) })
     return new Response(JSON.stringify({ status: true }))
   } catch (error) {
-    console.log(error)
+    return new Response(JSON.stringify({ status: false }))
+  }
+}
 
+export const PATCH = async (request: NextRequest) => {
+  try {
+    const body: { id: string; index: number } = await request.json()
+    if (!body.id) return new Response(JSON.stringify({ error: 'No id' }), { status: 400 })
+    else if (!body.index) return new Response(JSON.stringify({ error: 'No index' }), { status: 400 })
+
+    const collection = await MongoDBConnection(ECollection.Article)
+    await collection.updateOne({ _id: new ObjectId(body.id) }, { $set: { index: body.index } })
+  } catch (error) {
     return new Response(JSON.stringify({ status: false }))
   }
 }

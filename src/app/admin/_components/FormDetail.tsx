@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { IArticleDTO } from '@/models'
-import { Box, Button, Divider, IconButton, Paper, Typography, styled } from '@mui/material'
+import { Box, Button, Divider, IconButton, MenuItem, Paper, Select, Typography, styled } from '@mui/material'
 import GlobalModal, { IGlobalModalContext, mapGlobalModalContext } from 'partner-library-mfe/components/GlobalModal'
 import Link from 'next/link'
 import CloseIcon from '@mui/icons-material/Close'
 import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption'
 import { FormApprove, FormDelete } from './FormCommon'
 import ContentViewer from './ContentViewer'
+import PrioritizeMenu from './PrioritizeMenu'
 
 interface IProps {
   data: IArticleDTO
@@ -60,7 +61,9 @@ export default class FormDetail extends Component<IProps> {
 
   renderActions = () => {
     return mapGlobalModalContext((context) => (
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', py: '6px', gap: '12px' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', p: '9px 0 6px', gap: '12px' }}>
+        <PrioritizeMenu />
+        <Box flex={1} />
         <Button variant='contained' color='error' onClick={() => this.handleClickDelete(context)}>
           Delete
         </Button>
