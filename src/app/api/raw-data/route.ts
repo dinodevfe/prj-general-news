@@ -3,6 +3,7 @@ import { deleteFolderByName, getAllSubdirectories, getInfoArticle } from '../_he
 import { NextRequest, NextResponse } from 'next/server'
 import { EArticleStatus, IArticleDTO, IArticleMongoDB } from '@/models'
 import { MongoDBConnection, ECollection } from '@/lib/MongoDBConnection'
+import fs from 'fs'
 
 export const GET = async () => {
   try {
@@ -10,14 +11,15 @@ export const GET = async () => {
       throw new Error('Invalid/Missing environment variable: "DIR_PATH"')
     }
     const dirPath = process.env.DIR_PATH
-    const news = getAllSubdirectories(dirPath)
+    console.log(dirPath)
+
+    const news = fs.readdirSync(dirPath).map((x) => path.join(dirPath, x))
 
     const collection = await MongoDBConnection(ECollection.Article)
     const articlesApprove = await collection.find<IArticleMongoDB>({}).toArray()
 
     const data = news.map((item) => {
-      const articlePath = path.join(dirPath, item)
-      const obj = getInfoArticle(articlePath)
+      const obj = getInfoArticle(item)
       const aa = articlesApprove.find((e) => e.articleId === obj.articleId)
       if (!aa) return obj
       obj.id = aa._id
@@ -27,8 +29,9 @@ export const GET = async () => {
     })
 
     return new Response(JSON.stringify(data))
-  } catch (error) {
-    return new Response(JSON.stringify([]))
+  } catch (error: any) {
+    console.log(error)
+    return new Response(JSON.stringify([]), {status: 400, statusText: error.toString()})
   }
 }
 

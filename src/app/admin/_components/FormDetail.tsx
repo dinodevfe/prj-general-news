@@ -8,6 +8,8 @@ import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption'
 import { FormApprove, FormDelete } from './FormCommon'
 import ContentViewer from './ContentViewer'
 import PrioritizeMenu from './PrioritizeMenu'
+import { IPrioritizeMenuV2Model, PrioritizeMenuV2 } from './PrioritizeMenuV2'
+import { Sleep } from '@/helpers'
 
 interface IProps {
   data: IArticleDTO
@@ -60,9 +62,19 @@ export default class FormDetail extends Component<IProps> {
   }
 
   renderActions = () => {
+    const data: IPrioritizeMenuV2Model[] = [
+      { name: 'Name 1', value: '1' },
+      { name: 'Name 2', value: '2' }
+    ]
     return mapGlobalModalContext((context) => (
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', p: '9px 0 6px', gap: '12px' }}>
-        <PrioritizeMenu />
+        <PrioritizeMenuV2
+          data={data}
+          defaultValue={0}
+          onSubmitItem={async () => {
+            await Sleep(2000)
+          }}
+        />
         <Box flex={1} />
         <Button variant='contained' color='error' onClick={() => this.handleClickDelete(context)}>
           Delete
