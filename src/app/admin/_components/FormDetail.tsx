@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { IArticleDTO } from '@/models'
+import { EArticleStatus, EArticleType, IArticleDTO } from '@/models'
 import { Box, Button, Divider, IconButton, MenuItem, Paper, Select, Typography, styled } from '@mui/material'
 import GlobalModal, { IGlobalModalContext, mapGlobalModalContext } from 'partner-library-mfe/components/GlobalModal'
 import Link from 'next/link'
@@ -11,11 +11,18 @@ import PrioritizeMenu from './PrioritizeMenu'
 import { IPrioritizeMenuV2Model, PrioritizeMenuV2 } from './PrioritizeMenuV2'
 import { Sleep } from '@/helpers'
 
+const prioritizeMenuData: IPrioritizeMenuV2Model[] = [
+  { name: 'Normal', value: EArticleType.Normal },
+  { name: 'Hot', value: EArticleType.Hot },
+  { name: 'Carousel', value: EArticleType.Carousel }
+]
+
 interface IProps {
   data: IArticleDTO
   onClose?: () => void
-  onSubmit: (data: IArticleDTO) => void
+  onApprove: (data: IArticleDTO) => void
   onDelete: (data: IArticleDTO) => void
+  onChangeType: (value: IArticleDTO) => Promise<void>
 }
 
 export default class FormDetail extends Component<IProps> {
@@ -24,7 +31,7 @@ export default class FormDetail extends Component<IProps> {
       <Wrapper>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px', paddingBottom: '6px' }}>
           <ClosedCaptionIcon color='info' />
-          <Typography variant='h6' sx={{ flex: 1 }}>
+          <Typography variant='h6' sx={{ flex: 1 }} noWrap>
             {this.getTitle()}
           </Typography>
           <BtnClose onClick={this.props.onClose}>
@@ -62,32 +69,32 @@ export default class FormDetail extends Component<IProps> {
   }
 
   renderActions = () => {
-    const data: IPrioritizeMenuV2Model[] = [
-      { name: 'Name 1', value: '1' },
-      { name: 'Name 2', value: '2' }
-    ]
+    const typeIndex = this.getTypeMenuIndex()
+    const isApprove = this.props.data.status === EArticleStatus.Approve
     return mapGlobalModalContext((context) => (
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', p: '9px 0 6px', gap: '12px' }}>
-        <PrioritizeMenuV2
-          data={data}
-          defaultValue={0}
-          onSubmitItem={async () => {
-            await Sleep(2000)
-          }}
-        />
+        {isApprove && (
+          <PrioritizeMenuV2 data={prioritizeMenuData} defaultValue={typeIndex} onSubmitItem={this.handleChangeType} />
+        )}
         <Box flex={1} />
         <Button variant='contained' color='error' onClick={() => this.handleClickDelete(context)}>
           Delete
         </Button>
-        <Button
-          variant='contained'
-          onClick={() => this.handleClickApprove(context)}
-          disabled={this.props.data.status === 'Approve'}
-        >
+        <Button variant='contained' onClick={() => this.handleClickApprove(context)} disabled={isApprove}>
           Approve
         </Button>
       </Box>
     ))
+  }
+
+  getTypeMenuIndex = () => {
+    const index = prioritizeMenuData.findIndex((e) => e.value === this.props.data.type)
+    return index <= 0 ? 0 : index
+  }
+
+  handleChangeType = async (value: EArticleType) => {
+    const { data } = this.props
+    await this.props.onChangeType({ ...data, type: value })
   }
 
   handleClickDelete = (context: IGlobalModalContext) => {
@@ -109,7 +116,7 @@ export default class FormDetail extends Component<IProps> {
 
   onSubmit = () => {
     if (this.props.data.status === 'Approve') return
-    this.props.onSubmit(this.props.data)
+    this.props.onApprove(this.props.data)
     this.props.onClose && this.props.onClose()
   }
 

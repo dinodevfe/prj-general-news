@@ -60,11 +60,16 @@ export default class AdminPage extends Component<IProps, IState> {
         <FormDetail
           data={data}
           onClose={context.closeModal}
-          onSubmit={this.handleSubmitApprove}
+          onApprove={this.handleSubmitApprove}
           onDelete={this.handleSubmitDelete}
+          onChangeType={this.handleSubmitChangeType}
         />
       )
     })
+  }
+
+  handleSubmitChangeType = async (value: IArticleDTO) => {
+    await ArticlesService.changeType(value)
   }
 
   handleClickDelete = (context: IGlobalModalContext, data: IArticleDTO) => {

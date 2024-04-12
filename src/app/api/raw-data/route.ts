@@ -25,13 +25,14 @@ export const GET = async () => {
       obj.id = aa._id
       obj.status = EArticleStatus.Approve
       obj.dateApproved = aa.dateApproved
+      obj.type = aa.type
       return obj
     })
 
     return new Response(JSON.stringify(data))
   } catch (error: any) {
     console.log(error)
-    return new Response(JSON.stringify([]), {status: 400, statusText: error.toString()})
+    return new Response(JSON.stringify([]), { status: 400, statusText: error.toString() })
   }
 }
 

@@ -1,6 +1,6 @@
 'use client'
 import React, { Component } from 'react'
-import { IArticleDTO } from '@/models'
+import { EArticleType, IArticleDTO } from '@/models'
 import { Grid } from '@mui/material'
 import CardCarousel from './CardCarousel'
 import CardBasic from './CardBasic'
@@ -11,7 +11,7 @@ import CardMultiple from './CardMultiple'
 interface IList {
   nomalIndexs: IArticleDTO[]
   nomals: IArticleDTO[]
-  carousel: IArticleDTO[]
+  carousels: IArticleDTO[]
   hots: IArticleDTO[]
 }
 
@@ -22,18 +22,18 @@ interface IProps {
 export default class Content extends Component<IProps> {
   handleData = (): IList => {
     const { data } = this.props
-    const temp = data.filter((e) => !e.type || e.type === 'nomal')
+    const temp = data.filter((e) => !e.type || e.type === EArticleType.Normal)
     const index = 6
     return {
-      carousel: data.filter((e) => e.type === 'carousel'),
-      hots: data.filter((e) => e.type === 'hot'),
+      carousels: data.filter((e) => e.type === EArticleType.Carousel),
+      hots: data.filter((e) => e.type === EArticleType.Hot),
       nomalIndexs: temp.slice(0, index),
       nomals: temp.slice(index)
     }
   }
 
   render() {
-    const { nomals, nomalIndexs, hots, carousel } = this.handleData()
+    const { nomals, nomalIndexs, hots, carousels } = this.handleData()
     return (
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -63,7 +63,7 @@ export default class Content extends Component<IProps> {
           <CardBasic data={nomalIndexs[4]} />
         </Grid>
         <Grid item xs={6}>
-          <CardCarousel data={carousel} />
+          <CardCarousel data={carousels} key={carousels.length} />
         </Grid>
         <Grid item xs={3}>
           <CardBasic data={nomalIndexs[5]} />

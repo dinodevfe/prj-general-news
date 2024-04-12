@@ -58,6 +58,21 @@ class ArticlesService {
       return false
     }
   }
+
+  changeType = async (param: IArticleDTO) => {
+    try {
+      const res = await fetch('/api/news', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(param)
+      })
+      if (!res.ok) new Error('Something wrong!')
+      ApiAlertContext.ApiAlert?.PushSuccess('Successfully changed!')
+    } catch (error) {
+      ApiAlertContext.ApiAlert?.PushWarning('Change failed!')
+      return false
+    }
+  }
 }
 
 export default new ArticlesService()

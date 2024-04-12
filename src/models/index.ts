@@ -5,7 +5,7 @@ export interface ISlug {
 }
 
 export enum EArticleType {
-  Nomal = 'Nomal',
+  Normal = 'Normal',
   Hot = 'Hot',
   Carousel = 'Carousel'
 }

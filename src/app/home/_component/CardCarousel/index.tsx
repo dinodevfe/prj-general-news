@@ -12,7 +12,7 @@ interface IProps {
 
 export default class CardCarousel extends Component<IProps> {
   render() {
-    if (this.props.data.length < 1) return <SkeletonCardCarousel />
+    if (this.props.data.length < 2) return <SkeletonCardCarousel />
 
     return (
       <CustomSlider {...this.getSetting()}>

@@ -9,7 +9,7 @@ export interface IPrioritizeMenuV2Model {
 interface IPrioritizeMenuV2Props {
   data: IPrioritizeMenuV2Model[]
   defaultValue?: number
-  onSubmitItem?: (item: any) => Promise<void>
+  onSubmitItem?: (value: any) => Promise<void>
 }
 export const PrioritizeMenuV2: FC<IPrioritizeMenuV2Props> = (props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -40,7 +40,6 @@ export const PrioritizeMenuV2: FC<IPrioritizeMenuV2Props> = (props) => {
     async (item: any, index: number) => {
       handleClose()
       try {
-        console.log(index, indexSelected)
         if (props.onSubmitItem && index !== indexSelected) {
           setLoading(true)
           await props.onSubmitItem(item)
@@ -53,6 +52,7 @@ export const PrioritizeMenuV2: FC<IPrioritizeMenuV2Props> = (props) => {
     },
     [indexSelected]
   )
+
   return (
     <div>
       <LoadingButton
@@ -62,8 +62,10 @@ export const PrioritizeMenuV2: FC<IPrioritizeMenuV2Props> = (props) => {
         aria-haspopup='true'
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        color='inherit'
+        sx={{ textTransform: 'unset' }}
       >
-        <Box sx={{ opacity: loading ? 0.1 : 1 }}>{ItemSelected?.name ?? 'None'}</Box>
+        <Box sx={{ opacity: loading ? 0.1 : 1 }}>Article type: {ItemSelected?.name ?? 'None'}</Box>
       </LoadingButton>
       <Menu
         id='demo-positioned-menu'

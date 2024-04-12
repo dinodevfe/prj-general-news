@@ -41,10 +41,10 @@ export default class Item extends Component<IProps> {
   }
 
   renderImage = () => {
-    if (!this.props.data) {
-      return <Image alt='pic' src={PicDefault} />
-    }
-    return <Box component='img' alt='source-logo' src={this.props.data.imageUrl} />
+    const { data } = this.props
+    if (!data) return <Image alt='pic' src={PicDefault} />
+    const src = `/api/images/${data.articleId}/${data.imageUrl}`
+    return <Box component='img' alt='source-logo' src={src} />
   }
 }
 

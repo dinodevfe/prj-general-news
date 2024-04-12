@@ -13,8 +13,8 @@ export default class PrioritizeMenu extends Component {
     return (
       <FormControl>
         <InputLabel id='prioritize-select'>Type</InputLabel>
-        <CustomSelect id='prioritize-select' label='Type' size='small' value={EArticleType.Nomal}>
-          <MenuItem value={EArticleType.Nomal}>{ArticleType[EArticleType.Nomal]}</MenuItem>
+        <CustomSelect id='prioritize-select' label='Type' size='small' value={EArticleType.Normal}>
+          <MenuItem value={EArticleType.Normal}>{ArticleType[EArticleType.Normal]}</MenuItem>
           <MenuItem value={EArticleType.Hot}>{ArticleType[EArticleType.Hot]}</MenuItem>
           <MenuItem value={EArticleType.Carousel}>{ArticleType[EArticleType.Carousel]}</MenuItem>
         </CustomSelect>

@@ -81,6 +81,45 @@ export class FormApprove extends Component<IFormApproveProps> {
   }
 }
 
+interface IFormChangeTypeProps {
+  data: IArticleDTO
+  onSubmit: (value: IArticleDTO) => void
+  onClose: () => void
+}
+
+export class FormChangeType extends Component<IFormChangeTypeProps> {
+  render() {
+    return (
+      <CustomPaper elevation={1} sx={{ maxWidth: '350px' }}>
+        <Typography variant='h6' fontWeight={600}>
+          Change article type to {this.props.data.type}
+        </Typography>
+        <Typography variant='subtitle1'>{this.getTitle()}</Typography>
+        <Divider />
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px' }}>
+          <Button color='inherit' onClick={this.props.onClose}>
+            no
+          </Button>
+          <Button color='error' onClick={this.handleSubmit} autoFocus>
+            yes
+          </Button>
+        </Box>
+      </CustomPaper>
+    )
+  }
+
+  getTitle = () => {
+    const { title, articleId: id } = this.props.data
+    if (title !== '') return title
+    return id
+  }
+
+  handleSubmit = () => {
+    this.props.onClose && this.props.onClose()
+    this.props.onSubmit && this.props.onSubmit(this.props.data)
+  }
+}
+
 const CustomPaper = styled(Paper)({
   display: 'flex',
   flexDirection: 'column',
