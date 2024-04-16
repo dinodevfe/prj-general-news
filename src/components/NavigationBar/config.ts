@@ -8,9 +8,9 @@ export interface INavigation {
 
 export const NavigationConfig: INavigation[] = [
   { title: 'Mới nhất', pathname: NavigationKeys.Home },
-  { title: 'Tin tức', pathname: NavigationKeys.Topic, slug: 'tin-tuc' },
+  { title: 'Khoa học', pathname: NavigationKeys.Topic, slug: 'khoa-hoc' },
   { title: 'Thể thao', pathname: NavigationKeys.Topic, slug: 'the-thao' },
-  { title: 'Tài chính', pathname: NavigationKeys.Topic, slug: 'tai-chinh' },
+  { title: 'Kinh doanh', pathname: NavigationKeys.Topic, slug: 'kinh-doanh' },
   { title: 'Góc nhìn', pathname: NavigationKeys.Topic, slug: 'goc-nhin' }
 ]
 

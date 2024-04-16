@@ -1,7 +1,7 @@
 'use client'
 import React, { Component } from 'react'
 import { IArticleDTO, ISlug } from '@/models'
-import { Container, Grid } from '@mui/material'
+import { Box, Container, Grid, styled } from '@mui/material'
 import CardMultiple from '../_component/CardMultiple'
 import ReadNews from '../_component/ReadNews'
 import NewsService from '../_services/NewsService'
@@ -31,8 +31,6 @@ export default class DetailPage extends Component<IProps, IState> {
   }
 
   render() {
-    // console.log(this.props)
-
     return (
       <Container>
         <Grid container spacing={2} sx={{ pt: '18px', pb: '56px' }}>
@@ -40,10 +38,17 @@ export default class DetailPage extends Component<IProps, IState> {
             <ReadNews data={this.state.data} />
           </Grid>
           <Grid item xs={3}>
-            <CardMultiple />
+            <StickyBox>
+              <CardMultiple />
+            </StickyBox>
           </Grid>
         </Grid>
       </Container>
     )
   }
 }
+
+const StickyBox = styled(Box)({
+  position: 'sticky',
+  top: 0
+})

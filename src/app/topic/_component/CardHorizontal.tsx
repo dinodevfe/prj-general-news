@@ -45,10 +45,10 @@ export default class CardHorizontal extends Component<IProps> {
   }
 
   renderImage = () => {
-    if (!this.props.data) {
-      return <Image alt='pic' src={PicDefault} style={{ height: '100%', width: 'auto' }} />
-    }
-    return <Box component='img' alt='source-logo' src={this.props.data.imageUrl} style={{ height: '100%', width: 'auto' }} />
+    const { data } = this.props
+    if (!data) return <Image alt='pic' src={PicDefault} style={{ height: '100%', width: 'auto' }} />
+    const src = `/api/images/${data.articleId}/${data.imageUrl}`
+    return <Box className='img-article' component='img' alt='source-logo' src={src} style={{ height: '100%', width: 'auto' }} />
   }
 }
 

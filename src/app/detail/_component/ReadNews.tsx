@@ -1,10 +1,11 @@
 'use client'
 import React, { Component } from 'react'
 import { IArticleDTO } from '@/models'
-import { Box, Divider, Stack, Typography, styled } from '@mui/material'
+import { Divider, Stack, Typography, styled } from '@mui/material'
 import BasicNewsInfo from '@/components/BasicNewsInfo'
-import MoreInfo from './MoreInfo'
 import { ContentSkeleton } from './Skeleton'
+import MoreInfo from './MoreInfo'
+import ContentViewer from './ContentViewer'
 
 interface IProps {
   data?: IArticleDTO
@@ -19,14 +20,15 @@ export default class ReadNews extends Component<IProps> {
         <Divider flexItem />
         {this.renderContent()}
         <Divider flexItem />
-        <MoreInfo />
+        <MoreInfo data={this.props.data} />
       </Wrapper>
     )
   }
 
   renderContent = () => {
     if (!this.props.data) return <ContentSkeleton />
-    return <Typography dangerouslySetInnerHTML={{ __html: this.props.data?.content ?? 'Content' }}></Typography>
+    // return <Typography dangerouslySetInnerHTML={{ __html: this.props.data?.content ?? 'Content' }}></Typography>
+    return <ContentViewer data={this.props.data} />
   }
 }
 

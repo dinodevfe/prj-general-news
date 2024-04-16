@@ -1,6 +1,6 @@
 'use client'
 import React, { Component } from 'react'
-import { IArticleDTO, ISlug } from '@/models'
+import { IArticleDTO } from '@/models'
 import { Container, Grid, Stack, Typography } from '@mui/material'
 import TopicInfo from '../_component/TopicInfo'
 import CardMultiple from '../_component/CardMultiple'
@@ -8,8 +8,9 @@ import CardHorizontal from '../_component/CardHorizontal'
 import SuggestedSource from '../_component/SuggestedSource'
 import { getTitleTopic } from '@/components/NavigationBar/config'
 import TopicService from '../_services/TopicService'
+import { ITopicParams } from '@/app/api/topic/[tag]/route'
 
-interface IProps extends ISlug {}
+interface IProps extends ITopicParams {}
 
 interface IState {
   data: IArticleDTO[]
@@ -28,8 +29,7 @@ export default class TopicPage extends Component<IProps, IState> {
   }
 
   componentDidMount(): void {
-    const { slug } = this.props.params
-    this.fetchDetail(slug)
+    this.fetchDetail(this.props.params.tag)
   }
 
   render() {
@@ -38,7 +38,7 @@ export default class TopicPage extends Component<IProps, IState> {
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <Stack sx={{ gap: '18px' }}>
-              <TopicInfo title={getTitleTopic(this.props.params.slug)} />
+              <TopicInfo title={getTitleTopic(this.props.params.tag)} />
               <SuggestedSource />
               <Typography>{this.state.data.length}</Typography>
             </Stack>
