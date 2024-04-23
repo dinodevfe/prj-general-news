@@ -37,4 +37,4 @@ next-env.d.ts
 
 /src/data
 
-# yarn.lock
+yarn.lock

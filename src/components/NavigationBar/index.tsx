@@ -36,8 +36,9 @@ export default NavigationBar
 const Ul = styled('ul')({
   display: 'flex',
   alignItems: 'center',
-  gap: '6px',
-  padding: '3px 0'
+  justifyContent: 'center',
+  gap: '18px',
+  padding: '12px 0'
 })
 
 const Li = styled('li')({

@@ -20,7 +20,7 @@ export default class CardBasic extends Component<IProps> {
       <Box sx={{ width: '100%', pb: '100%', position: 'relative' }}>
         <Wrapper {...{ component: Link, href: this.getHref(this.props.data.articleId), target: '_blank' }}>
           <ImageWrapper>{this.renderImage()}</ImageWrapper>
-          <Stack sx={{ gap: '6px', padding: '9px' }}>
+          <Stack sx={{ gap: '3px', padding: '9px', height: '94px' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <AvatarSource>
                 <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -33,7 +33,9 @@ export default class CardBasic extends Component<IProps> {
                 {formatTimeAgo(this.props.data.dateApproved)}
               </Typography>
             </Box>
-            <Title variant='h6'>{this.props.data.title}</Title>
+            <Title variant='body1' {...{ component: 'h2' }}>
+              {this.props.data.title}
+            </Title>
           </Stack>
         </Wrapper>
       </Box>
@@ -54,7 +56,7 @@ const SkeletonCard: FC = () => (
   <Box sx={{ width: '100%', pb: '100%', position: 'relative' }}>
     <Wrapper>
       <Skeleton variant='rectangular' width='100%' height='50%' />
-      <Stack sx={{ gap: '6px', padding: '9px' }}>
+      <Stack sx={{ gap: '3px', padding: '9px' }}>
         <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
         <Skeleton variant='rounded' width='100%' height={60} />
       </Stack>
@@ -62,10 +64,9 @@ const SkeletonCard: FC = () => (
   </Box>
 )
 
-const Wrapper = styled(Box)({
+const Wrapper = styled(Stack)({
   borderRadius: '6px',
-  backgroundColor: '#fff',
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px',
+  backgroundColor: '#fafafa',
   position: 'absolute',
   height: '100%',
   width: '100%',
@@ -75,6 +76,10 @@ const Wrapper = styled(Box)({
   textDecoration: 'unset',
   color: '#000',
   overflow: 'hidden',
+  transition: 'linear 0.2s',
+  '&:hover': {
+    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px'
+  },
   '&:hover .img-article': {
     transform: 'scale(1.05)'
   }
@@ -88,7 +93,8 @@ const AvatarSource = styled(Box)({
 })
 
 const ImageWrapper = styled(Box)({
-  height: '50%',
+  // height: '50%',
+  flex: 1,
   overflow: 'hidden',
   '& > img': {
     objectFit: 'cover',
@@ -100,9 +106,11 @@ const ImageWrapper = styled(Box)({
 })
 
 const Title = styled(Typography)({
+  flex: 1,
   display: '-webkit-box',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   WebkitLineClamp: 2,
-  WebkitBoxOrient: 'vertical'
+  WebkitBoxOrient: 'vertical',
+  fontWeight: 600
 })

@@ -13,19 +13,27 @@ interface IProps {
 export default class MoreInfo extends Component<IProps> {
   render() {
     return (
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Wrapper>
         <AvatarSource>
           <Image alt='source-logo' src={SourceDefault} />
         </AvatarSource>
+        <Typography>{this.props.data?.sourceTitle}</Typography>
         <Box flex={1} />
-        <CustomLink href={this.props.data?.originUrl} target='_blank'>
-          <Typography>Link bài viết góc </Typography>
-          <OpenInNewIcon />
+        <CustomLink href={this.props.data?.sourceUrl} target='_blank'>
+          <OpenInNewIcon sx={{ color: '#767676' }} />
         </CustomLink>
-      </Box>
+      </Wrapper>
     )
   }
 }
+
+const Wrapper = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  backgroundColor: '#fafafa',
+  borderRadius: '6px',
+  padding: '4px 18px'
+})
 
 const AvatarSource = styled(Box)({
   height: '72px',

@@ -11,6 +11,8 @@ import FormDetail from './_components/FormDetail'
 import ItemRowMenu from './_components/ItemRowMenu'
 import ArticlesService from './_services/ArticlesService'
 
+import './styled.css'
+
 const Table = CreateTable()
 
 interface IProps {}
@@ -50,7 +52,7 @@ export default class AdminPage extends Component<IProps, IState> {
     />
   )
 
-  renderRowMenu = ({ data, children }: TItemRowMenuRender<IArticleDTO>) => {
+  renderRowMenu = ({ data }: TItemRowMenuRender<IArticleDTO>) => {
     return mapGlobalModalContext((context) => <ItemRowMenu onEdit={() => this.handleClickDetail(context, data)} />)
   }
 
