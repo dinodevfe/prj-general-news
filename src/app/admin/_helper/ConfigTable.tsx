@@ -1,6 +1,6 @@
 import { EArticleStatus, IArticleDTO } from '@/models'
 import { Typography, styled } from '@mui/material'
-import { CreateTableTemplate, MapOperators } from 'partner-library-mfe/components/TableTemplate'
+import { CreateTableTemplate, MapOperators } from '@/components/TableTemplate'
 
 const StatusColors: { [key in EArticleStatus]: string } = {
   Pending: 'linear-gradient(to right,#0d6efd,#82baff)',

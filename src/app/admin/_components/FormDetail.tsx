@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { EArticleStatus, EArticleType, IArticleDTO } from '@/models'
 import { Box, Button, Divider, IconButton, MenuItem, Paper, Select, Typography, styled } from '@mui/material'
-import GlobalModal, { IGlobalModalContext, mapGlobalModalContext } from 'partner-library-mfe/components/GlobalModal'
+import GlobalModal, { IGlobalModalContext, mapGlobalModalContext } from '@/components/GlobalModal'
 import Link from 'next/link'
 import CloseIcon from '@mui/icons-material/Close'
 import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption'
