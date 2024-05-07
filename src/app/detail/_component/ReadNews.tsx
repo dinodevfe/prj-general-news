@@ -1,9 +1,10 @@
 'use client'
 import React, { Component } from 'react'
 import { IArticleDTO } from '@/models'
-import { Divider, Stack, Typography, styled } from '@mui/material'
+import { Box, Divider, Link, Stack, Typography, styled } from '@mui/material'
 import BasicNewsInfo from '@/components/BasicNewsInfo'
 import { ContentSkeleton } from './Skeleton'
+import ShareBar from './ShareBar'
 import MoreInfo from './MoreInfo'
 import ContentViewer from './ContentViewer'
 
@@ -15,11 +16,23 @@ export default class ReadNews extends Component<IProps> {
   render() {
     return (
       <Wrapper>
-        <Typography variant='h5'>{this.props.data?.title ?? 'Title'}</Typography>
-        <BasicNewsInfo data={this.props.data} />
-        <Divider flexItem />
+        <Typography variant='h4' component='h1'>
+          {this.props.data?.title ?? 'Title'}
+        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+          <BasicNewsInfo data={this.props.data} />
+          <Box flex={1} />
+          <ShareBar />
+        </Box>
+        <Divider sx={{ my: '9px' }} />
         {this.renderContent()}
-        <Divider flexItem />
+        <Divider sx={{ m: '24px 0 18px' }} />
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px', mb: '18px' }}>
+          <Typography>Link bài viết góc,</Typography>
+          <CustomLink href={this.props.data?.originUrl} target='_blank'>
+            tại đây
+          </CustomLink>
+        </Box>
         <MoreInfo data={this.props.data} />
       </Wrapper>
     )
@@ -27,15 +40,25 @@ export default class ReadNews extends Component<IProps> {
 
   renderContent = () => {
     if (!this.props.data) return <ContentSkeleton />
-    // return <Typography dangerouslySetInnerHTML={{ __html: this.props.data?.content ?? 'Content' }}></Typography>
     return <ContentViewer data={this.props.data} />
   }
 }
 
-const Wrapper = styled(Stack)({
+const Wrapper = styled(Box)({
   borderRadius: '6px',
   backgroundColor: '#fff',
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px',
-  padding: '18px',
-  gap: '9px'
+  paddingRight: '18px'
+})
+
+const CustomLink = styled(Link)({
+  display: 'flex',
+  alignItems: 'center',
+  cursor: 'pointer',
+  gap: '6px',
+  color: '#000000',
+  textDecoration: 'unset',
+  fontWeight: 600,
+  '&:hover': {
+    color: '#0078D4'
+  }
 })

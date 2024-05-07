@@ -1,5 +1,5 @@
 import { IArticleDTO } from '@/models'
-import { ApiAlertContext } from 'partner-library-mfe/components/AlertGlobal'
+import { ApiAlertContext } from '@/components/AlertGlobal'
 
 class ArticlesService {
   fetchRawData = async (): Promise<IArticleDTO[]> => {

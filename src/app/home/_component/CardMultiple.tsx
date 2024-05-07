@@ -1,7 +1,7 @@
 'use client'
 import React, { Component, FC } from 'react'
 import { IArticleDTO } from '@/models'
-import { Box, Skeleton, Stack, Typography, styled } from '@mui/material'
+import { Box, BoxProps, Skeleton, Stack, StackProps, Typography, boxClasses, stackClasses, styled } from '@mui/material'
 import Image from 'next/image'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import SourceDefault from '@/images/source-logo.jpg'
@@ -86,14 +86,35 @@ const SkeletonCard: FC = () => {
 
 const Wrapper = styled(Stack)({
   borderRadius: '6px',
-  backgroundColor: '#fff',
-  boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px',
+  backgroundColor: '#fafafa',
+  // boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px',
   position: 'absolute',
   height: '100%',
   width: '100%',
   top: 0,
   left: 0,
   padding: '9px'
+})
+
+const WrapperV2 = styled(({ className, children, ...props }: BoxProps) => (
+  <Box {...props} className={className}>
+    <Stack>{children}</Stack>
+  </Box>
+))({
+  width: '100%',
+  pb: '100%',
+  position: 'relative',
+  [`& > .${stackClasses.root}`]: {
+    borderRadius: '6px',
+    backgroundColor: '#fff',
+    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px',
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    top: 0,
+    left: 0,
+    padding: '9px'
+  }
 })
 
 const AvatarSource = styled(Box)({

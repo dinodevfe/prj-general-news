@@ -2,15 +2,15 @@
 import React, { Component } from 'react'
 import { EArticleType, IArticleDTO } from '@/models'
 import { Grid } from '@mui/material'
+import CardBasic from '@/components/cards/CardBasic'
 import CardCarousel from './CardCarousel'
-import CardBasic from './CardBasic'
 import CardTrends from './CardTrends'
 import CardWelcome from './CardWelcome'
 import CardMultiple from './CardMultiple'
 
 interface IList {
-  nomalIndexs: IArticleDTO[]
-  nomals: IArticleDTO[]
+  normalIndexs: IArticleDTO[]
+  normals: IArticleDTO[]
   carousels: IArticleDTO[]
   hots: IArticleDTO[]
 }
@@ -23,17 +23,17 @@ export default class Content extends Component<IProps> {
   handleData = (): IList => {
     const { data } = this.props
     const temp = data.filter((e) => !e.type || e.type === EArticleType.Normal)
-    const index = 6
+    const normalCount = 7
     return {
       carousels: data.filter((e) => e.type === EArticleType.Carousel),
       hots: data.filter((e) => e.type === EArticleType.Hot),
-      nomalIndexs: temp.slice(0, index),
-      nomals: temp.slice(index)
+      normalIndexs: temp.slice(0, normalCount),
+      normals: temp.slice(normalCount)
     }
   }
 
   render() {
-    const { nomals, nomalIndexs, hots, carousels } = this.handleData()
+    const { normals: nomals, normalIndexs: nomalIndexs, hots, carousels } = this.handleData()
     return (
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -56,17 +56,17 @@ export default class Content extends Component<IProps> {
           <CardBasic data={nomalIndexs[3]} />
         </Grid>
         <Grid item xs={3}>
-          <CardTrends />
+          <CardBasic data={nomalIndexs[4]} />
         </Grid>
 
         <Grid item xs={3}>
-          <CardBasic data={nomalIndexs[4]} />
+          <CardBasic data={nomalIndexs[5]} />
         </Grid>
         <Grid item xs={6}>
           <CardCarousel data={carousels} key={carousels.length} />
         </Grid>
         <Grid item xs={3}>
-          <CardBasic data={nomalIndexs[5]} />
+          <CardBasic data={nomalIndexs[6]} />
         </Grid>
 
         {nomals.map((item, index) => (

@@ -1,15 +1,17 @@
 'use client'
 import React, { Component } from 'react'
 import { EArticleStatus, IArticleDTO } from '@/models'
-import { AlertGlobal } from 'partner-library-mfe/components/AlertGlobal'
-import { TItemRowMenuRender } from 'partner-library-mfe/components/TableTemplate'
-import GlobalModal, { IGlobalModalContext, mapGlobalModalContext } from 'partner-library-mfe/components/GlobalModal'
+import { AlertGlobal } from '@/components/AlertGlobal'
+import { TItemRowMenuRender } from '@/components/TableTemplate'
+import GlobalModal, { IGlobalModalContext, mapGlobalModalContext } from '@/components/GlobalModal'
 import { CreateTable } from './_helper'
 import { FormDelete } from './_components/FormCommon'
 import Layout from './_components/layout'
 import FormDetail from './_components/FormDetail'
 import ItemRowMenu from './_components/ItemRowMenu'
 import ArticlesService from './_services/ArticlesService'
+
+import './styled.css'
 
 const Table = CreateTable()
 
@@ -50,7 +52,7 @@ export default class AdminPage extends Component<IProps, IState> {
     />
   )
 
-  renderRowMenu = ({ data, children }: TItemRowMenuRender<IArticleDTO>) => {
+  renderRowMenu = ({ data }: TItemRowMenuRender<IArticleDTO>) => {
     return mapGlobalModalContext((context) => <ItemRowMenu onEdit={() => this.handleClickDetail(context, data)} />)
   }
 
