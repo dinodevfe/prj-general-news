@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { CancelToken } from 'axios'
 import store from './store'
 

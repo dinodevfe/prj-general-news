@@ -61,7 +61,9 @@ export class GlobalModal extends Component<TProps, IState> implements IGlobalMod
 
   generateContent = (): JSX.Element => {
     const Content = this.state.content ?? (() => <></>)
-    const Temp = React.forwardRef(() => <Content />)
+    const ContentComponent = () => <Content />
+    ContentComponent.displayName = 'ContentComponent'
+    const Temp = React.forwardRef(ContentComponent)
     return <Temp />
   }
 
@@ -85,6 +87,7 @@ export class GlobalModal extends Component<TProps, IState> implements IGlobalMod
     )
   }
 }
+
 export default GlobalModal
 
 const Wrapper = styled(Box)({

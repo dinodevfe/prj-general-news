@@ -50,7 +50,7 @@ export const PrioritizeMenuV2: FC<IPrioritizeMenuV2Props> = (props) => {
         setLoading(false)
       }
     },
-    [indexSelected]
+    [indexSelected, props]
   )
 
   return (

@@ -1,6 +1,6 @@
 import { IArticleDTO } from '@/models'
 
-class ArticlesService {
+class ArticlesServiceBase {
   add = async (args: string): Promise<boolean> => {
     try {
       const res = await fetch('/api/test', {
@@ -15,5 +15,5 @@ class ArticlesService {
     }
   }
 }
-
-export default new ArticlesService()
+const ArticlesService = new ArticlesServiceBase()
+export default ArticlesService

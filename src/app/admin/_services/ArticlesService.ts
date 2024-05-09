@@ -1,7 +1,7 @@
 import { IArticleDTO } from '@/models'
 import { ApiAlertContext } from '@/components/AlertGlobal'
 
-class ArticlesService {
+class ArticlesServiceBase {
   fetchRawData = async (): Promise<IArticleDTO[]> => {
     try {
       const res = await fetch(`/api/raw-data`)
@@ -74,5 +74,5 @@ class ArticlesService {
     }
   }
 }
-
-export default new ArticlesService()
+const ArticlesService = new ArticlesServiceBase()
+export default ArticlesService

@@ -1,11 +1,11 @@
 import { IArticleDTO } from '@/models'
 
-class TopicService {
+class TopicServiceBase {
   detail = async (tag: string): Promise<IArticleDTO[] | undefined> => {
     const res = await fetch(`/api/topic/${tag}`)
     if (!res.ok) return
     return await res.json()
   }
 }
-
-export default new TopicService()
+const TopicService = new TopicServiceBase()
+export default TopicService

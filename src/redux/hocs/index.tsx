@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, import/no-named-as-default-member */
 import React, { Component, ComponentType } from 'react'
 import { connect, ConnectedComponent } from 'react-redux'
 import { AppDispatch, LazyStatus } from '../type'
