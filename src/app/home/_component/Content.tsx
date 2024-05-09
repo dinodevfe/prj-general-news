@@ -4,7 +4,6 @@ import { EArticleType, IArticleDTO } from '@/models'
 import { Grid } from '@mui/material'
 import CardBasic from '@/components/cards/CardBasic'
 import CardCarousel from './CardCarousel'
-import CardTrends from './CardTrends'
 import CardWelcome from './CardWelcome'
 import CardMultiple from './CardMultiple'
 

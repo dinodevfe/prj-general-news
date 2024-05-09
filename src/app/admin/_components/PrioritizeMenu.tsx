@@ -3,7 +3,7 @@ import { FormControl, InputLabel, MenuItem, Select, styled } from '@mui/material
 import { EArticleType } from '@/models'
 
 const ArticleType: { [key in EArticleType]: string } = {
-  Nomal: 'Basic',
+  Normal: 'Basic',
   Hot: 'Hot list',
   Carousel: 'Carousel list'
 }

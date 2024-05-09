@@ -2,6 +2,13 @@ import React from 'react'
 import { GridRowIdGetter, GridValidRowModel, GridFilterModel, GridFilterOperator } from '@mui/x-data-grid'
 import { GridSortModel, DataGridProps, GridColDef, GridCallbackDetails, GridPaginationModel } from '@mui/x-data-grid'
 
+export interface DictionaryNum<T> {
+  [id: number]: T | undefined;
+}
+export interface Dictionary<T> extends DictionaryNum<T> {
+  [id: string]: T | undefined;
+}
+
 export interface ITableTemplatePropBases<T extends GridValidRowModel> {
   InnerProps?: Omit<DataGridProps<T> & React.RefAttributes<HTMLDivElement>, 'rows' | 'columns' | 'getRowId'>
   CRUDPannel?: React.JSXElementConstructor<any>

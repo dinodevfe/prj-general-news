@@ -1,15 +1,10 @@
 // 'use client'
 'use server'
-import React, { Component, FC, cache } from 'react'
-import { IArticleDTO } from '@/models'
-import { Container, styled } from '@mui/material'
+import React, { FC } from 'react'
+import { Container } from '@mui/material'
 import Content from './_component/Content'
 
-interface IProps {
-  data: IArticleDTO[]
-}
-
-interface IState {}
+interface IProps {}
 
 const getData = async () => {
   const res = await fetch('http://localhost:3000/api/news')
@@ -19,8 +14,6 @@ const getData = async () => {
 }
 
 const HomePage: FC<IProps> = async (props: IProps) => {
-  console.log(props)
-
   const data = await getData()
 
   return (

@@ -1,7 +1,9 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
 import Script from 'next/script'
+
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,7 +41,7 @@ export default function RootLayout({
         <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' />
       </header> */}
       <body className={inter.className}>
-        {children}
+        <Suspense>{children}</Suspense>
         <Script
           async
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9643912173816808'

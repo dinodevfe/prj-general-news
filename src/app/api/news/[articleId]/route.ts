@@ -1,5 +1,3 @@
-import { Sleep } from '@/helpers'
-import { NewsListFake } from '../../fake-data'
 import { ECollection, MongoDBConnection } from '@/lib/MongoDBConnection'
 
 interface INewDetail {

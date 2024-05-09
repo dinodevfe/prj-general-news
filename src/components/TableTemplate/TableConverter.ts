@@ -1,6 +1,5 @@
-import { Dictionary } from '@reduxjs/toolkit'
 import { GridFilterModel, GridFilterItem, GridLogicOperator, GridSortModel } from '@mui/x-data-grid'
-import { EOperator, IConverterConfig, IFetchModel } from './type'
+import { EOperator, IConverterConfig, IFetchModel, Dictionary } from './type'
 
 interface IResultFilterGraphql {
   take?: number
