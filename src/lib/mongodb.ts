@@ -5,6 +5,8 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI
+console.log(uri);
+
 const options = {
   serverApi: {
     version: ServerApiVersion.v1,

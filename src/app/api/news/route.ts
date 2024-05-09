@@ -9,7 +9,8 @@ export const GET = async () => {
     const data = JSON.stringify(await collection.find({}).toArray())
     return new Response(data)
   } catch (error) {
-    return new Response(JSON.stringify([]))
+    console.log(error)
+    return new Response(JSON.stringify({ error: 'No articleId' }), { status: 400 })
   } finally {
   }
 }
