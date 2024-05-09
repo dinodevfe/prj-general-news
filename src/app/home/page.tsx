@@ -26,7 +26,6 @@ const HomePage: FC<IProps> = async (props: IProps) => {
   return (
     <Container style={{ padding: '18px 0 56px' }}>
       <Content data={data} />
-      <></>
     </Container>
   )
 }
