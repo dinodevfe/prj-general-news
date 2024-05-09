@@ -16,6 +16,7 @@
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.11",
     "@mui/types": "^7.2.14",
+    "@mui/x-data-grid": "^6.18.0",
     "@reduxjs/toolkit": "^2.2.1",
     "alloyeditor": "^2.14.10",
     "mongodb": "^6.5.0",
