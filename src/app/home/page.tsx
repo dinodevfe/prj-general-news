@@ -1,4 +1,3 @@
-// 'use client'
 'use server'
 import React, { FC } from 'react'
 import { Container } from '@mui/material'
