@@ -5,7 +5,7 @@ import Content from './_component/Content'
 
 const getData = async () => {
   try {
-    const res = await global.fetch('http://localhost:3000/api/news')
+    const res = await global.fetch('/api/news')
     if (!res.ok) return []
     const data = await res.json()
     return data
