@@ -1,4 +1,4 @@
-import { ECollection, MongoDBConnection } from '@/lib/MongoDBConnection'
+import { ECollection, MongoDBConnection } from '@/library/MongoDBConnection'
 
 interface INewDetail {
   articleId?: string

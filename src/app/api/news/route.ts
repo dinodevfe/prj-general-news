@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { EArticleType, IArticleDTO } from '@/models'
 import { NextRequest } from 'next/server'
-import { MongoDBConnection, ECollection } from '@/lib/MongoDBConnection'
+import { MongoDBConnection, ECollection } from '@/library/MongoDBConnection'
 
 export const GET = async () => {
   try {

@@ -2,7 +2,7 @@ import path from 'path'
 import { deleteFolderByName, getAllSubdirectories, getInfoArticle } from '../_helper/file_reader'
 import { NextRequest, NextResponse } from 'next/server'
 import { EArticleStatus, IArticleDTO, IArticleMongoDB } from '@/models'
-import { MongoDBConnection, ECollection } from '@/lib/MongoDBConnection'
+import { MongoDBConnection, ECollection } from '@/library/MongoDBConnection'
 import fs from 'fs'
 
 export const GET = async () => {

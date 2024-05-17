@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { ECollection, MongoDBConnection } from '@/lib/MongoDBConnection'
+import { ECollection, MongoDBConnection } from '@/library/MongoDBConnection'
 
 export interface ITopicParams {
   params: { tag: string }

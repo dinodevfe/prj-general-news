@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { ISlug } from '@/models'
 import { deleteFolderByName, getAllSubdirectories, getInfoArticle } from '../_helper/file_reader'
 import path from 'path'
-import clientPromise from '@/lib/mongodb'
+import clientPromise from '@/library/mongodb'
 import { Timestamp } from 'mongodb'
 
 export const GET = async (req: NextRequest) => {
