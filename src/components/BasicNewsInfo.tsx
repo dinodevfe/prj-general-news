@@ -1,6 +1,6 @@
 'use client'
 import React, { Component } from 'react'
-import { IArticleDTO } from '@/models'
+import { IArticle } from '@/models'
 import { formatTimeAgo } from '@/helpers'
 import { Box, Typography, styled } from '@mui/material'
 import Image from 'next/image'
@@ -8,7 +8,7 @@ import SourceDefault from '@/images/source-logo.jpg'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 
 interface IProps {
-  data?: IArticleDTO
+  data?: IArticle
 }
 
 export default class BasicNewsInfo extends Component<IProps> {

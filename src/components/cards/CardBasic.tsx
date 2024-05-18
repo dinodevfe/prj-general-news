@@ -1,23 +1,24 @@
 'use client'
 import React, { Component, FC } from 'react'
 import { formatTimeAgo } from '@/helpers'
-import { IArticleDTO, NavigationKeys } from '@/models'
+import { IArticle, NavigationKeys } from '@/models'
 import { Box, Skeleton, Stack, Typography, styled } from '@mui/material'
 import Link from 'next/link'
 import Image from 'next/image'
 import PicDefault from '@/images/image-default.jpg'
 import SourceDefault from '@/images/source-logo.jpg'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
+import Utilities from '@/utilities'
 
 interface IProps {
-  data?: IArticleDTO
+  data?: IArticle
 }
 
 export default class CardBasic extends Component<IProps> {
   render() {
     if (!this.props.data) return <SkeletonCard />
     return (
-      <Box sx={{ width: '100%', pb: '100%', position: 'relative' }}>
+      <Box component='article' sx={{ width: '100%', pb: '100%', position: 'relative' }}>
         <Wrapper {...{ component: Link, href: this.getHref(this.props.data.articleId), target: '_blank' }}>
           <ImageWrapper>{this.renderImage()}</ImageWrapper>
           <Stack sx={{ gap: '3px', padding: '9px', height: '94px' }}>
@@ -47,8 +48,7 @@ export default class CardBasic extends Component<IProps> {
   renderImage = () => {
     const { data } = this.props
     if (!data) return <Image alt='pic' src={PicDefault} />
-    const src = `/api/images/${data.articleId}/${data.imageUrl}`
-    return <Box className='img-article' component='img' alt='source-logo' src={src} />
+    return <Box className='img-article' component='img' alt='source-logo' src={Utilities.getImageUri(data.imageUrl)} />
   }
 }
 

@@ -21,8 +21,6 @@ interface IProps {
 export default class Content extends Component<IProps> {
   handleData = (): IList => {
     const { data } = this.props
-    console.log(data)
-
     const temp = data.filter((e) => !e.type || e.type === EArticleType.Normal)
     const normalCount = 7
     return {

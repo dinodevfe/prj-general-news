@@ -1,7 +1,7 @@
 import { IArticle } from '@/models'
 import { ApiAlertContext } from '@/components/AlertGlobal'
 import ServiceBase from '@/services/ServiceBase'
-import Lb4Query from './Lb4Query'
+import Lb4Query from './lb4-query'
 
 class ArticlesServiceBase extends ServiceBase {
   constructor() {
@@ -20,5 +20,4 @@ class ArticlesServiceBase extends ServiceBase {
     }
   }
 }
-const ArticlesService = new ArticlesServiceBase()
-export default ArticlesService
+export const ArticlesService = new ArticlesServiceBase()

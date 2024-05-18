@@ -1,9 +1,9 @@
 'use client'
 import React, { FC, useEffect, useState } from 'react'
-import { Box, Container, Fade } from '@mui/material'
-import Content from './ui/Content'
-import ArticlesService from './services/ArticlesService'
 import { IArticle } from '@/models'
+import { Box, Container, Fade } from '@mui/material'
+import { ArticlesService } from './services'
+import Content from './ui/Content'
 
 const getData = async () => {
   try {
