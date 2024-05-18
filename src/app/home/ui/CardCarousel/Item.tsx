@@ -1,14 +1,14 @@
-'use client'
 import React, { Component } from 'react'
-import { IArticleDTO } from '@/models'
+import { IArticle } from '@/models'
 import { Box, Stack, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import PicDefault from '@/images/image-default.jpg'
 import SourceDefault from '@/images/source-logo.jpg'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
+import Utilities from '@/utilities'
 
 interface IProps {
-  data: IArticleDTO
+  data: IArticle
 }
 
 export default class Item extends Component<IProps> {
@@ -43,8 +43,8 @@ export default class Item extends Component<IProps> {
   renderImage = () => {
     const { data } = this.props
     if (!data) return <Image alt='pic' src={PicDefault} />
-    const src = `/api/images/${data.articleId}/${data.imageUrl}`
-    return <Box component='img' alt='source-logo' src={src} />
+    // const src = `/api/images/${data.articleId}/${data.imageUrl}`
+    return <Box component='img' alt='source-logo' src={Utilities.getImageUri(data.imageUrl)} />
   }
 }
 

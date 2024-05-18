@@ -3,9 +3,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Box, Container, Grid, Stack } from '@mui/material'
 import ImageLoader from '@/components/ImageLoader'
-import CardMultiple from './home/_component/CardMultiple'
-import SkeletonCardCarousel from './home/_component/CardCarousel/Skeleton'
-import EditorPage from './admin/_components/TextEditor'
 
 const Home: FC = () => {
   const router = useRouter()

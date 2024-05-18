@@ -1,6 +1,6 @@
 'use client'
 import React, { Component } from 'react'
-import { EArticleType, IArticleDTO } from '@/models'
+import { EArticleType, IArticle } from '@/models'
 import { Grid } from '@mui/material'
 import CardBasic from '@/components/cards/CardBasic'
 import CardCarousel from './CardCarousel'
@@ -8,19 +8,21 @@ import CardWelcome from './CardWelcome'
 import CardMultiple from './CardMultiple'
 
 interface IList {
-  normalIndexs: IArticleDTO[]
-  normals: IArticleDTO[]
-  carousels: IArticleDTO[]
-  hots: IArticleDTO[]
+  normalIndexs: IArticle[]
+  normals: IArticle[]
+  carousels: IArticle[]
+  hots: IArticle[]
 }
 
 interface IProps {
-  data: IArticleDTO[]
+  data: IArticle[]
 }
 
 export default class Content extends Component<IProps> {
   handleData = (): IList => {
     const { data } = this.props
+    console.log(data)
+
     const temp = data.filter((e) => !e.type || e.type === EArticleType.Normal)
     const normalCount = 7
     return {
