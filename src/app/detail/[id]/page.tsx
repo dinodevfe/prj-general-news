@@ -1,11 +1,11 @@
 'use client'
 import React, { FC } from 'react'
 import { IArticle } from '@/models'
+import { ArticleService } from '@/services'
 import { Box, Container, Grid } from '@mui/material'
+import { RecommendedArticle } from '../ui/recommended-article'
 import ReadNews from '../ui/read-news'
-import CardBasic from '../ui/card-basic'
 import CardMultiple from '../ui/card-multiple'
-import ArticleService from '../services/article.service'
 
 interface IDetailParams {
   params: { id: string }
@@ -16,12 +16,14 @@ interface IProps extends IDetailParams {}
 const Page: FC<IProps> = (props) => {
   // const data = await ArticleService.detail(props.params.id)
 
-  const [data, setdata] = React.useState<IArticle>()
+  const [data, setData] = React.useState<IArticle>()
+  const [rArticles, setRArticles] = React.useState<IArticle[]>([])
 
   React.useEffect(() => {
     const funAsync = async () => {
-      const res = await ArticleService.detail(props.params.id)
-      setdata(res)
+      const [resArticles, resRArticles] = await Promise.all([ArticleService.detail(props.params.id), ArticleService.recommends()])
+      setData(resArticles)
+      setRArticles(resRArticles)
     }
     funAsync()
     return () => {}
@@ -59,13 +61,7 @@ const Page: FC<IProps> = (props) => {
           </Box>
         </Grid>
       </Grid>
-      <Grid container spacing={2} sx={{ mt: '48px' }}>
-        {[...Array(8)].map((item, index) => (
-          <Grid key={index} item xs={3}>
-            <CardBasic />
-          </Grid>
-        ))}
-      </Grid>
+      <RecommendedArticle data={rArticles} />
       <Box height='128px' />
     </Container>
   )

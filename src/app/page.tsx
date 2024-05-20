@@ -2,14 +2,13 @@
 import React, { FC, useEffect, useState } from 'react'
 import { IArticle } from '@/models'
 import { Box, Container, Fade } from '@mui/material'
-import { ArticlesService } from '../services'
+import { ArticleService } from '../services'
 import ArticlesContent from './ui/articles-content'
-import CustomLayout from '@/components/custom-layout'
+import CustomLayout from '@/app/ui/custom-layout'
 
 const getData = async () => {
   try {
-    const res = await ArticlesService.all()
-    console.log(res)
+    const res = await ArticleService.all()
     return res
   } catch (error) {
     console.log(error)
@@ -20,6 +19,8 @@ const getData = async () => {
 interface IProps {}
 
 const HomePage: FC<IProps> = (props: IProps) => {
+  // const data = await getData()
+
   const [data, setData] = useState<IArticle[]>([])
   useEffect(() => {
     const func = async () => {
@@ -27,8 +28,6 @@ const HomePage: FC<IProps> = (props: IProps) => {
     }
     func()
   }, [])
-
-  // const data = []
 
   return (
     <CustomLayout>

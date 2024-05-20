@@ -3,19 +3,19 @@ if (!process.env.API_URI) {
 }
 
 export class ServiceBase {
-  headers?: HeadersInit
+  private headers?: HeadersInit
   constructor() {
     this.headers = { 'content-type': 'application/json' }
   }
 
-  GET = async (url: string) => {
+  protected GET = async (url: string) => {
     return fetch(`${process.env.API_URI}/${url}`, {
       method: 'GET',
       headers: this.headers
     })
   }
 
-  POST = async <T = any>(url: string, body: T) => {
+  protected POST = async <T = any>(url: string, body: T) => {
     return fetch(`${process.env.API_URI}/${url}`, {
       method: 'POST',
       headers: this.headers,
@@ -23,7 +23,7 @@ export class ServiceBase {
     })
   }
 
-  PATCH = async <T = any>(url: string, body: T) => {
+  protected PATCH = async <T = any>(url: string, body: T) => {
     return fetch(`${process.env.API_URI}/${url}`, {
       method: 'PATCH',
       headers: this.headers,
@@ -31,7 +31,7 @@ export class ServiceBase {
     })
   }
 
-  DELETE = async (url: string) => {
+  protected DELETE = async (url: string) => {
     return fetch(`${process.env.API_URI}/${url}`, {
       method: 'DELETE',
       headers: this.headers

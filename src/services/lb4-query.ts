@@ -21,4 +21,28 @@ export default class Lb4Query {
     }
     return encodeURIComponent(JSON.stringify(obj))
   }
+
+  static recommendedArticlesQuery = () => {
+    const obj = {
+      limit: 8,
+      fields: {
+        id: true,
+        articleId: true,
+        title: true,
+        description: true,
+        author: true,
+        patch: true,
+        imageUrl: true,
+        imageUrlOrigin: true,
+        sourceTitle: true,
+        sourceUrl: true,
+        dateApproved: true,
+        dateRawCrawled: true,
+        status: true,
+        type: true
+      },
+      order: 'dateApproved DESC'
+    }
+    return encodeURIComponent(JSON.stringify(obj))
+  }
 }

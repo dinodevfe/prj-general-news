@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { IArticle } from '@/models'
 import { Box, Divider, Link, Typography, styled } from '@mui/material'
-import BasicNewsInfo from '@/components/basic-news-info'
+import BasicNewsInfo from '@/app/ui/basic-news-info'
 import { ContentSkeleton } from './skeletons'
 import ShareBar from './share-bar'
 import MoreInfo from './more-info'

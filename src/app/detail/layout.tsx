@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react'
-import CustomLayout from '@/components/custom-layout'
+import CustomLayout from '@/app/ui/custom-layout'
 
 const Layout: FC<PropsWithChildren<{}>> = (props) => {
   return <CustomLayout>{props.children}</CustomLayout>

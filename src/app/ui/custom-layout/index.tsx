@@ -18,7 +18,7 @@ const CustomLayout: FC<PropsWithChildren<IProps>> = (props) => {
       <Box component='header' className='header'>
         <Container>
           <Box sx={{ display: 'flex', alignItems: 'flex-end', py: '18px' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <ThunderstormIcon />
               <Typography>31 °C, Ho Chi Minh City</Typography>
             </Box>

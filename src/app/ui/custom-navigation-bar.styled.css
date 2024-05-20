@@ -9,6 +9,7 @@
   margin: 0 9px;
 }
 
+.custom-nav ul li a.active,
 .custom-nav ul li:hover {
   color: #309b65;
 }
