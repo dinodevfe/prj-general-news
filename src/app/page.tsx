@@ -1,88 +1,45 @@
 'use client'
 import React, { FC, useEffect, useState } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Box, Container, Grid, Stack } from '@mui/material'
-import ImageLoader from '@/components/ImageLoader'
+import { IArticle } from '@/models'
+import { Box, Container, Fade } from '@mui/material'
+import { ArticlesService } from '../services'
+import ArticlesContent from './ui/articles-content'
+import CustomLayout from '@/components/custom-layout'
 
-const Home: FC = () => {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const [currentActive, setCurrentActive] = useState(0)
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const blocks = document.querySelectorAll('.partial-item')
-  //     let current = currentActive
-  //     let found = false
-
-  //     blocks.forEach((block, index) => {
-  //       const blockTop = block.getBoundingClientRect().top
-  //       const blockBottom = block.getBoundingClientRect().bottom
-  //       if (blockTop >= 0 && blockTop < window.innerHeight) {
-  //         current = index
-  //         found = true
-  //       }
-  //     })
-
-  //     // for (let index = 0; index < blocks.length; index++) {
-  //     //   const block = blocks[index]
-  //     //   const blockTop = block.getBoundingClientRect().top
-  //     //   if (blockTop >= 0 && blockTop < window.innerHeight) {
-  //     //     current = index
-  //     //     found = true
-  //     //     break
-  //     //   }
-  //     // }
-
-  //     if (!found) {
-  //       for (let i = 0; i < blocks.length; i++) {
-  //         const blockTop = blocks[i].getBoundingClientRect().top
-  //         if (blockTop >= 0 && blockTop < window.innerHeight) {
-  //           current = i
-  //           break
-  //         }
-  //       }
-  //     }
-
-  //     if (currentActive != current) {
-  //       const params = new URLSearchParams(searchParams)
-  //       params.set('block', current + '')
-  //       const newParams = params.toString()
-  //       router.push(`${pathname}?${newParams}`, { scroll: false })
-  //       setCurrentActive(current)
-  //     }
-  //   }
-
-  //   window.addEventListener('scroll', handleScroll)
-  //   return () => window.removeEventListener('scroll', handleScroll)
-  // }, [])
-
-  return (
-    <Container>
-      {/* <ImageLoader /> */}
-      <Grid container sx={{ my: '24px' }}>
-        <Grid item xs={6}>
-          {/* <SkeletonCardCarousel /> */}
-        </Grid>
-        <Grid></Grid>
-      </Grid>
-      {/* <Stack sx={{ gap: '50px', py: '56px' }}>
-        <Box className='partial-item' sx={{ width: '100%', height: '120vh', backgroundColor: 'red' }}>
-          Block 0
-        </Box>
-        <Box className='partial-item' sx={{ width: '100%', height: '120vh', backgroundColor: 'green' }}>
-          Block 1
-        </Box>
-        <Box className='partial-item' sx={{ width: '100%', height: '120vh', backgroundColor: 'blue' }}>
-          Block 2
-        </Box>
-        <Box className='partial-item' sx={{ width: '100%', height: '120vh', backgroundColor: 'blueviolet' }}>
-          Block 3
-        </Box>
-      </Stack> */}
-    </Container>
-  )
+const getData = async () => {
+  try {
+    const res = await ArticlesService.all()
+    console.log(res)
+    return res
+  } catch (error) {
+    console.log(error)
+    return []
+  }
 }
 
-export default Home
+interface IProps {}
+
+const HomePage: FC<IProps> = (props: IProps) => {
+  const [data, setData] = useState<IArticle[]>([])
+  useEffect(() => {
+    const func = async () => {
+      setData(await getData())
+    }
+    func()
+  }, [])
+
+  // const data = []
+
+  return (
+    <CustomLayout>
+      <Container style={{ padding: '18px 0 56px' }}>
+        <Fade in={data.length > 0} unmountOnExit>
+          <Box>
+            <ArticlesContent data={data} />
+          </Box>
+        </Fade>
+      </Container>
+    </CustomLayout>
+  )
+}
+export default HomePage

@@ -1,5 +1,5 @@
 export enum NavigationKeys {
-  Home = '/home',
+  Home = '/',
   Topic = '/topic',
   Detail = '/detail'
 }

@@ -1,9 +1,7 @@
-'use client'
-import React, { Component, PropsWithChildren } from 'react'
-import CustomLayout from '@/components/CustomLayout'
+import React, { FC, PropsWithChildren } from 'react'
+import CustomLayout from '@/components/custom-layout'
 
-export default class LayoutChild extends Component<PropsWithChildren<{}>> {
-  render() {
-    return <CustomLayout>{this.props.children}</CustomLayout>
-  }
+const Layout: FC<PropsWithChildren<{}>> = (props) => {
+  return <CustomLayout>{props.children}</CustomLayout>
 }
+export default Layout
