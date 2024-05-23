@@ -1,5 +1,4 @@
 import { IArticle } from '@/models'
-import { ApiAlertContext } from '@/app/ui/alert-global'
 import ServiceBase from '@/services/service-base'
 
 class ArticleServiceBase extends ServiceBase {
@@ -14,7 +13,6 @@ class ArticleServiceBase extends ServiceBase {
       return await res.json()
     } catch (error: any) {
       console.log(error.message)
-      ApiAlertContext.ApiAlert?.PushWarning('Get data failed! Server something wrong...')
       return []
     }
   }
@@ -32,13 +30,9 @@ class ArticleServiceBase extends ServiceBase {
 
   recommends = async (): Promise<IArticle[]> => {
     try {
-      // const res = await this.GET(`articles?filter=${Lb4Query.recommendedArticlesQuery()}`)
-      // if (!res.ok) return []
-      // return await res.json()
       return []
     } catch (error: any) {
       console.log(error.message)
-      ApiAlertContext.ApiAlert?.PushWarning('Get data failed! Server something wrong...')
       return []
     }
   }
