@@ -3,7 +3,7 @@ import { formatTimeAgo } from './Timer'
 export default class Utilities {
   static getImageUri = (filename?: string) => {
     if (!filename) return '/image-default.jpg'
-    return `${process.env.IMAGE_API_URI}/${filename}`
+    return `${process.env.IMAGE_API_URI ?? '/api/images'}/${filename}`
   }
 
   static formatTimeAgo = formatTimeAgo
