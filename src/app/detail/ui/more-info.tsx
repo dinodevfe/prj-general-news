@@ -17,9 +17,9 @@ export default class MoreInfo extends Component<IProps> {
         <AvatarSource>
           <Image alt='source-logo' src={SourceDefault} />
         </AvatarSource>
-        <Typography>{this.props.data?.sourceTitle}</Typography>
+        <Typography>{this.props.data?.sourceOrigin}</Typography>
         <Box flex={1} />
-        <CustomLink href={this.props.data?.sourceUrl} target='_blank'>
+        <CustomLink href={this.props.data?.sourceUriOrigin} target='_blank'>
           <OpenInNewIcon sx={{ color: '#767676' }} />
         </CustomLink>
       </Wrapper>

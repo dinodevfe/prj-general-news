@@ -2,8 +2,8 @@
 const nextConfig = {
   output: 'standalone',
   env: {
-    API_URI: 'http://localhost:4202/api',
-    IMAGE_API_URI: 'http://localhost:4202/api/images'
+    API_URI: 'http://localhost:3000/api',
+    IMAGE_API_URI: 'http://localhost:3000/api/images'
   }
 }
 

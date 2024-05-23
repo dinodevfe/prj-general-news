@@ -19,12 +19,12 @@ export default class BasicNewsInfo extends Component<IProps> {
           <Image alt='source-logo' src={SourceDefault} />
         </AvatarSource>
         <Typography variant='caption' sx={{ color: '#767676' }}>
-          {this.props.data?.sourceTitle ?? 'Title'}
+          {this.props.data?.sourceOrigin ?? 'Title'}
         </Typography>
         {this.renderAuthor()}
         <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
         <Typography variant='caption' sx={{ color: '#767676' }}>
-          {this.props.data && Utilities.formatTimeAgo(this.props.data.dateApproved)}
+          {this.props.data && Utilities.formatTimeAgo(this.props.data.dateCreatedAt)}
         </Typography>
       </Box>
     )

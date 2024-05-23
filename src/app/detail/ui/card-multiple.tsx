@@ -6,6 +6,7 @@ import PicDefault from '@/images/image-default.jpg'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import SourceDefault from '@/images/source-logo.jpg'
 import { IArticle } from '@/models'
+import Utilities from '@/utilities'
 
 const initialData = (max = 3) => {
   const list: string[] = [
@@ -63,8 +64,8 @@ export default class CardMultiple extends Component {
 
   renderImage = (data?: IArticle) => {
     if (!data) return <Image alt='pic' src={PicDefault} style={{ height: '81px', width: '81px' }} />
-    const src = `/api/images/${data.articleId}/${data.imageUrl}`
-    return <Box component='img' alt='source-logo' src={src} style={{ height: '81px', width: '81px' }} />
+    const imageUri = Utilities.getImageUri(data.imageUri)
+    return <Box component='img' alt='source-logo' src={imageUri} style={{ height: '81px', width: '81px' }} />
   }
 }
 

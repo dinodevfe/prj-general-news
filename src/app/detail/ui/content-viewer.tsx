@@ -11,7 +11,7 @@ const ContentViewer: FC<IProps> = (props) => {
   return (
     <Box>
       {props.data.content?.map((item, index) => (
-        <Item articleId={props.data.articleId} origin={props.data.sourceTitle} data={item} key={index} />
+        <Item articleId={props.data.id} origin={props.data.sourceOrigin ?? ''} data={item} key={index} />
       ))}
     </Box>
   )

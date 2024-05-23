@@ -29,7 +29,7 @@ export default class ReadNews extends Component<IProps> {
         <Divider sx={{ m: '24px 0 18px' }} />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px', mb: '18px' }}>
           <Typography>Link bài viết góc,</Typography>
-          <CustomLink href={this.props.data?.originUrl} target='_blank'>
+          <CustomLink href={this.props.data?.uriOrigin} target='_blank'>
             tại đây
           </CustomLink>
         </Box>
