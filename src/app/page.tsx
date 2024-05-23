@@ -1,33 +1,24 @@
-'use client'
-import React, { FC, useEffect, useState } from 'react'
+'use server'
+import React, { FC } from 'react'
 import { IArticle } from '@/models'
 import { Container } from '@mui/material'
 import { ArticleService } from '../services'
 import ArticlesContent from './ui/articles-content'
 import CustomLayout from '@/app/ui/custom-layout'
 
-const getData = async () => {
-  try {
-    const res = await ArticleService.all()
-    return res
-  } catch (error) {
-    console.log(error)
-    return []
-  }
-}
-
 interface IProps {}
 
-const HomePage: FC<IProps> = (props: IProps) => {
-  // const data = await getData()
+const HomePage: FC<IProps> = async (props: IProps) => {
+  const data: IArticle[] = await ArticleService.all()
 
-  const [data, setData] = useState<IArticle[]>([])
-  useEffect(() => {
-    const func = async () => {
-      setData(await getData())
-    }
-    func()
-  }, [])
+  // const [data, setData] = React.useState<IArticle[]>([])
+  // React.useEffect(() => {
+  //   const func = async () => {
+  //     const res = await ArticleService.all()
+  //     setData(res)
+  //   }
+  //   func()
+  // }, [])
 
   return (
     <CustomLayout>

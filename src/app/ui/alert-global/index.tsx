@@ -1,3 +1,4 @@
+'use client'
 import React, { FC, useCallback, useEffect, useState } from 'react'
 import { Stack, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import MuiAlert, { AlertProps, AlertColor } from '@mui/material/Alert'

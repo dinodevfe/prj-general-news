@@ -1,11 +1,10 @@
-'use client'
+'use server'
 import React, { FC } from 'react'
 import { IArticle } from '@/models'
+import { ArticleService } from '@/services'
 import { Container, Grid, Stack, Typography, Box, Chip } from '@mui/material'
-import TopicService from '../services/topic.service'
 import CardMultiple from '../ui/CardMultiple'
 import CardHorizontal from '../ui/CardHorizontal'
-import { ArticleService } from '@/services'
 
 interface ITopicParams {
   params: { tag: string }
@@ -15,19 +14,18 @@ interface IProps extends ITopicParams {}
 
 const TagTemp = [{ title: 'Other Category' }, { title: 'Tag 1' }, { title: 'Tag 2' }, { title: 'Tag 3' }]
 
-const Page: FC<IProps> = (props) => {
-  // const  data = await TopicService.detail(props.params.tag)
+const Page: FC<IProps> = async (props) => {
+  const data: IArticle[] = await ArticleService.filterByTag(props.params.tag)
 
-  const [data, setdata] = React.useState<IArticle[]>()
-
-  React.useEffect(() => {
-    const funAsync = async () => {
-      const res = await ArticleService.filterByTag(props.params.tag)
-      setdata(res)
-    }
-    funAsync()
-    return () => {}
-  }, [])
+  // const [data, setdata] = React.useState<IArticle[]>()
+  // React.useEffect(() => {
+  //   const funAsync = async () => {
+  //     const res = await ArticleService.filterByTag(props.params.tag)
+  //     setdata(res)
+  //   }
+  //   funAsync()
+  //   return () => {}
+  // }, [])
 
   return (
     <Container sx={{ pt: '18px', pb: '56px' }}>

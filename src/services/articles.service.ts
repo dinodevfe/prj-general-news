@@ -26,7 +26,6 @@ class ArticleServiceBase extends ServiceBase {
       return await res.json()
     } catch (error: any) {
       console.log(error.message)
-      ApiAlertContext.ApiAlert?.PushWarning('Get data failed! Server something wrong...')
       return []
     }
   }
