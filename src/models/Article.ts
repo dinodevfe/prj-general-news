@@ -1,23 +1,24 @@
 import { TArticleContent } from './Content'
 import { EArticleStatus } from './enums/ArticleStatus'
-import { EArticleType } from './enums/ArticleType'
+import { EArticlePosition } from './enums/ArticleType'
 
 export interface IArticle {
   id: string
-  articleId: string
-  title: string
+  title?: string
   description?: string
-  author: string
-  patch: string
+  /** link - article origin */
+  uriOrigin: string
+  imageUriOrigin?: string
+  imageUri?: string
+  dateCreatedAt?: string
+  author?: string
+  articleType?: string
+  /** title - newspaper page origin */
+  sourceOrigin?: string 
+  /** link - newspaper page origin */
+  sourceUriOrigin?: string
+  patch?: string
+  status?: EArticleStatus
+  position?: EArticlePosition
   content?: TArticleContent[]
-  imageUrl: string
-  originUrl: string
-  sourceTitle: string
-  sourceUrl: string
-  dateApproved?: string
-  dateRawCrawled?: string
-  status: EArticleStatus
-  index?: number
-  tag?: string
-  type?: EArticleType
 }

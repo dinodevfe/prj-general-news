@@ -16,7 +16,7 @@ export default class Item extends Component<IProps> {
   render() {
     return (
       <Box component='article'>
-        <Wrapper {...{ component: Link, href: this.getHref(this.props.data.articleId), target: '_blank' }}>
+        <Wrapper {...{ component: Link, href: this.getHref(this.props.data.id), target: '_blank' }}>
           <ImageWrapper>{this.renderImage()}</ImageWrapper>
           <Shadow />
           <Stack sx={{ gap: '6px', padding: '9px', position: 'absolute', bottom: '28px', left: 0, width: '100%' }}>
@@ -25,7 +25,7 @@ export default class Item extends Component<IProps> {
                 <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </AvatarSource>
               <Typography variant='caption' sx={{ color: '#f7f7f7' }}>
-                {this.props.data?.sourceTitle ?? 'Source title'}
+                {this.props.data?.sourceOrigin ?? 'Source title'}
               </Typography>
               <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#f7f7f7' }} />
               <Typography variant='caption' sx={{ color: '#f7f7f7' }}>
@@ -44,7 +44,7 @@ export default class Item extends Component<IProps> {
   renderImage = () => {
     const { data } = this.props
     if (!data) return <Image alt='pic' src={PicDefault} />
-    return <Box className='img-article' component='img' alt='source-logo' src={Utilities.getImageUri(data.imageUrl)} />
+    return <Box className='img-article' component='img' alt='source-logo' src={Utilities.getImageUri(data.imageUri)} />
   }
 
   getHref = (id: string) => `${NavigationKeys.Detail}/${id}`

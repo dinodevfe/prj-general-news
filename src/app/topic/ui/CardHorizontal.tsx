@@ -26,11 +26,11 @@ export default class CardHorizontal extends Component<IProps> {
               <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </AvatarSource>
             <Typography variant='caption' sx={{ color: '#767676' }}>
-              {this.props.data.sourceTitle}
+              {this.props.data.sourceOrigin}
             </Typography>
             <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
             <Typography variant='caption' sx={{ color: '#767676' }}>
-              {Utilities.formatTimeAgo(this.props.data.dateApproved)}
+              {Utilities.formatTimeAgo(this.props.data.dateCreatedAt)}
             </Typography>
           </Box>
           <Typography variant='body2' sx={{ color: '#767676' }}>
@@ -50,7 +50,7 @@ export default class CardHorizontal extends Component<IProps> {
           className='img-article'
           component='img'
           alt='source-logo'
-          src={Utilities.getImageUri(data.imageUrl)}
+          src={Utilities.getImageUri(data.imageUri)}
           style={{ height: '100%', width: 'auto' }}
         />
       </Box>
@@ -59,7 +59,7 @@ export default class CardHorizontal extends Component<IProps> {
 
   getHref = (id?: string) => `${NavigationKeys.Detail}/${id}`
 
-  getLinkProps = () => ({ component: Link, href: this.getHref(this.props.data?.articleId), target: '_blank' })
+  getLinkProps = () => ({ component: Link, href: this.getHref(this.props.data?.id), target: '_blank' })
 }
 
 const Wrapper = styled(Box)({

@@ -18,7 +18,7 @@ export default class CardBasic extends Component<IProps> {
     if (!this.props.data) return <SkeletonCard />
     return (
       <Box component='article' sx={{ width: '100%', pb: '100%', position: 'relative' }}>
-        <Wrapper {...{ component: Link, href: this.getHref(this.props.data.articleId), target: '_blank' }}>
+        <Wrapper {...{ component: Link, href: this.getHref(this.props.data.id), target: '_blank' }}>
           <ImageWrapper>{this.renderImage()}</ImageWrapper>
           <Stack sx={{ gap: '3px', padding: '9px', height: '94px' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -26,11 +26,11 @@ export default class CardBasic extends Component<IProps> {
                 <Image alt='source-logo' src={SourceDefault} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </AvatarSource>
               <Typography variant='caption' sx={{ color: '#767676' }}>
-                {this.props.data.sourceTitle}
+                {this.props.data.sourceOrigin}
               </Typography>
               <FiberManualRecordIcon sx={{ width: '0.35em', height: '0.35em', color: '#767676' }} />
               <Typography variant='caption' sx={{ color: '#767676' }}>
-                {Utilities.formatTimeAgo(this.props.data.dateApproved)}
+                {Utilities.formatTimeAgo(this.props.data.dateCreatedAt)}
               </Typography>
             </Box>
             <Title variant='body1' {...{ component: 'h2' }}>
@@ -47,7 +47,7 @@ export default class CardBasic extends Component<IProps> {
   renderImage = () => {
     const { data } = this.props
     if (!data) return <Image alt='pic' src={PicDefault} />
-    return <Box className='img-article' component='img' alt='source-logo' src={Utilities.getImageUri(data.imageUrl)} />
+    return <Box className='img-article' component='img' alt='source-logo' src={Utilities.getImageUri(data.imageUri)} />
   }
 }
 

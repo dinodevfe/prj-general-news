@@ -5,7 +5,8 @@ if (!process.env.IMAGE_API_URI) {
 }
 
 export default class Utilities {
-  static getImageUri = (filename: string) => {
+  static getImageUri = (filename?: string) => {
+    if (!filename) return '/image-default.jpg'
     return `${process.env.IMAGE_API_URI}/${filename}`
   }
 

@@ -1,7 +1,7 @@
 'use client'
 import React, { FC, useEffect, useState } from 'react'
 import { IArticle } from '@/models'
-import { Box, Container, Fade } from '@mui/material'
+import { Container } from '@mui/material'
 import { ArticleService } from '../services'
 import ArticlesContent from './ui/articles-content'
 import CustomLayout from '@/app/ui/custom-layout'
@@ -32,11 +32,7 @@ const HomePage: FC<IProps> = (props: IProps) => {
   return (
     <CustomLayout>
       <Container style={{ padding: '18px 0 56px' }}>
-        <Fade in={data.length > 0} unmountOnExit>
-          <Box>
-            <ArticlesContent data={data} />
-          </Box>
-        </Fade>
+        <ArticlesContent data={data} />
       </Container>
     </CustomLayout>
   )

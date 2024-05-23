@@ -1,10 +1,11 @@
 'use client'
 import React, { FC } from 'react'
 import { IArticle } from '@/models'
-import { Container, Grid, Stack, Typography, styled, Box, Chip, BoxProps, chipClasses } from '@mui/material'
+import { Container, Grid, Stack, Typography, Box, Chip } from '@mui/material'
 import TopicService from '../services/topic.service'
 import CardMultiple from '../ui/CardMultiple'
 import CardHorizontal from '../ui/CardHorizontal'
+import { ArticleService } from '@/services'
 
 interface ITopicParams {
   params: { tag: string }
@@ -21,7 +22,7 @@ const Page: FC<IProps> = (props) => {
 
   React.useEffect(() => {
     const funAsync = async () => {
-      const res = await TopicService.detail(props.params.tag)
+      const res = await ArticleService.filterByTag(props.params.tag)
       setdata(res)
     }
     funAsync()
