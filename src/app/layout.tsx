@@ -33,6 +33,11 @@ export default function RootLayout({
           type='text/css'
           href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
         />
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5549525642315117'
+          crossOrigin='anonymous'
+        ></script>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
