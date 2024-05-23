@@ -55,7 +55,15 @@ export default class ArticlesContent extends Component<IProps> {
           <CardBasic data={nomalIndexs[3]} />
         </Grid>
         <Grid item xs={3}>
-          <CardBasic data={nomalIndexs[4]} />
+          {/* <CardBasic data={nomalIndexs[4]} /> */}
+          <ins
+            className='adsbygoogle'
+            style={{display:'block'}}
+            data-ad-client='ca-pub-5549525642315117'
+            data-ad-slot='9930358465'
+            data-ad-format='auto'
+            data-full-width-responsive='true'
+          ></ins>
         </Grid>
 
         <Grid item xs={3}>
