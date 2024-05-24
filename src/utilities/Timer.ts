@@ -1,18 +1,22 @@
 export const formatTimeAgo = (value?: string): string => {
   if (!value) return 'Unknown'
+
   let date = value
-  if (!date.includes('Z')) date = `${date}Z`
+  if (!date.endsWith('Z')) date += 'Z'
+
   const targetDate = new Date(date)
+  if (isNaN(targetDate.getTime())) return 'Unknown'
+
   const now: Date = new Date()
   const timeDifference: number = now.getTime() - targetDate.getTime()
 
-  const seconds: number = Math.floor(timeDifference / 1000)
+  const seconds: number = Math.floor(Math.abs(timeDifference) / 1000)
   const minutes: number = Math.floor(seconds / 60)
   const hours: number = Math.floor(minutes / 60)
   const days: number = Math.floor(hours / 24)
 
   if (seconds < 0) {
-    return `0 seconds ago`
+    return `${seconds} | 0 seconds ago`
   } else if (seconds < 60) {
     return `${seconds} seconds ago`
   } else if (minutes < 60) {
