@@ -46,19 +46,22 @@ export function Adsense({
   }, [])
 
   return (
-    <ins
-      className={`adsbygoogle ${className}`}
-      style={style}
-      data-ad-client={client}
-      data-ad-slot={slot}
-      data-ad-layout={layout}
-      data-ad-layout-key={layoutKey}
-      data-ad-format={format}
-      data-full-width-responsive={responsive}
-      data-adtest={adTest}
-      {...rest}
-    >
-      {children}
-    </ins>
+    <div className='adsbygoogle-card'>
+      <ins
+        className={`adsbygoogle ${className}`}
+        style={style}
+        data-ad-client={client}
+        data-ad-slot={slot}
+        data-ad-layout={layout}
+        data-ad-layout-key={layoutKey}
+        data-ad-format={format}
+        data-full-width-responsive={responsive}
+        data-adtest={adTest}
+        {...rest}
+      >
+        {children}
+      </ins>
+      {/* <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> */}
+    </div>
   )
 }

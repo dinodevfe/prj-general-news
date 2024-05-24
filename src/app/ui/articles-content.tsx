@@ -56,15 +56,7 @@ export default class ArticlesContent extends Component<IProps> {
         </Grid>
         <Grid item xs={3}>
           {/* <CardBasic data={nomalIndexs[4]} /> */}
-          <ins
-            className='adsbygoogle'
-            style={{ display: 'block', width: '100%', height: '100%' }}
-            data-ad-client='ca-pub-5549525642315117'
-            data-ad-slot='9930358465'
-            data-ad-format='auto'
-            data-full-width-responsive='true'
-          ></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          {this.renderAdsense()}
         </Grid>
 
         <Grid item xs={3}>
@@ -76,13 +68,50 @@ export default class ArticlesContent extends Component<IProps> {
         <Grid item xs={3}>
           <CardBasic data={nomalIndexs[6]} />
         </Grid>
-
-        {nomals.map((item, index) => (
-          <Grid item xs={3} key={index}>
-            <CardBasic data={item} />
-          </Grid>
-        ))}
+        {this.renderNomals(nomals)}
       </Grid>
     )
   }
+
+  renderAdsense = () => (
+    <div className='adsbygoogle-card'>
+      <ins
+        className='adsbygoogle'
+        style={{ display: 'block', width: '100%', height: '100%' }}
+        data-ad-client='ca-pub-5549525642315117'
+        data-ad-slot='9930358465'
+        data-ad-format='auto'
+        data-full-width-responsive='true'
+      ></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  )
+
+  renderNomals = (items: IArticle[]) => {
+    const list = items.map((item, index) => (
+      <Grid item xs={3} key={index}>
+        <CardBasic data={item} />
+      </Grid>
+    ))
+    return insertElements(list, adsIndexs, (index) => (
+      <Grid item xs={3} key={`ads-${index}`}>
+        {this.renderAdsense()}
+      </Grid>
+    ))
+  }
+}
+
+const adsIndexs: number[] = [5]
+
+const insertElements = (
+  elements: JSX.Element[],
+  positions: number[],
+  elementToInsert: (index: number) => JSX.Element
+): JSX.Element[] => {
+  let newElements = [...elements]
+  positions.sort((a, b) => a - b)
+  positions.forEach((position, index) => {
+    newElements.splice(position + index, 0, elementToInsert(index))
+  })
+  return newElements
 }
