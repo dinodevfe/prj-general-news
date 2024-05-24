@@ -39,7 +39,10 @@ export default function RootLayout({
           crossOrigin='anonymous'
         ></script>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </body>
     </html>
   )
 }
