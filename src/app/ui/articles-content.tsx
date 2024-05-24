@@ -74,7 +74,7 @@ export default class ArticlesContent extends Component<IProps> {
   }
 
   renderAdsense = () => (
-    <div className='adsbygoogle-card'>
+    <div className='adsbygoogle-card' style={{ width: '100%', height: '100%' }}>
       <ins
         className='adsbygoogle'
         style={{ display: 'block', width: '100%', height: '100%' }}
