@@ -101,7 +101,7 @@ export default class ArticlesContent extends Component<IProps> {
   }
 }
 
-const adsIndexs: number[] = [5]
+const adsIndexs: number[] = []
 
 const insertElements = (
   elements: JSX.Element[],
