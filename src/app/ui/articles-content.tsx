@@ -73,19 +73,24 @@ export default class ArticlesContent extends Component<IProps> {
     )
   }
 
-  renderAdsense = () => (
-    <div className='adsbygoogle-card' style={{ width: '100%', height: '100%' }}>
-      <ins
-        className='adsbygoogle'
-        style={{ display: 'block', width: '100%', height: '100%' }}
-        data-ad-client='ca-pub-5549525642315117'
-        data-ad-slot='9930358465'
-        data-ad-format='auto'
-        data-full-width-responsive='true'
-      ></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-  )
+  renderAdsense = () => {
+    if (process.env.NODE_ENV === 'development') {
+      return <div className='adsbygoogle-card' style={{ width: '100%', height: '100%' }} />
+    }
+    return (
+      <div className='adsbygoogle-card' style={{ width: '100%', height: '100%' }}>
+        <ins
+          className='adsbygoogle'
+          style={{ display: 'block', width: '100%', height: '100%' }}
+          data-ad-client='ca-pub-5549525642315117'
+          data-ad-slot='9930358465'
+          data-ad-format='auto'
+          data-full-width-responsive='true'
+        ></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    )
+  }
 
   renderNomals = (items: IArticle[]) => {
     const list = items.map((item, index) => (

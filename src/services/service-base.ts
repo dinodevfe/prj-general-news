@@ -1,6 +1,6 @@
-if (!process.env.API_URI) {
-  throw new Error('Invalid/Missing environment variable: "API_URI"')
-}
+// if (!process.env.API_URI) {
+//   throw new Error('Invalid/Missing environment variable: "API_URI"')
+// }
 
 export class ServiceBase {
   private headers?: HeadersInit
