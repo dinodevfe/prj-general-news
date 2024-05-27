@@ -1,4 +1,4 @@
-'use client'
+'use server'
 import React, { FC } from 'react'
 import { IArticle } from '@/models'
 import { Container } from '@mui/material'
@@ -8,17 +8,17 @@ import CustomLayout from '@/app/ui/custom-layout'
 
 interface IProps {}
 
-const HomePage: FC<IProps> = (props: IProps) => {
-  // const data: IArticle[] = await ArticleService.all()
+const HomePage: FC<IProps> = async (props: IProps) => {
+  const data: IArticle[] = await ArticleService.all()
 
-  const [data, setData] = React.useState<IArticle[]>([])
-  React.useEffect(() => {
-    const func = async () => {
-      const res = await ArticleService.all()
-      setData(res)
-    }
-    func()
-  }, [])
+  // const [data, setData] = React.useState<IArticle[]>([])
+  // React.useEffect(() => {
+  //   const func = async () => {
+  //     const res = await ArticleService.all()
+  //     setData(res)
+  //   }
+  //   func()
+  // }, [])
 
   return (
     <CustomLayout>

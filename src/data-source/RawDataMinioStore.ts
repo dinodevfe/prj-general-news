@@ -1,9 +1,11 @@
 import { EArticlePosition, EArticleStatus, IArticle } from '@/models'
-import { MinioBucket, MinioStore } from './MinioStore'
+import { MinioBucket, MinioStore } from './minio-store'
 import DataSource from './base'
+import DbStore from './db-store'
 
 export default class RawDataMinioStore implements DataSource {
   bucket: MinioBucket
+  dbStore: DbStore
   constructor() {
     const store = new MinioStore({
       endpoint: 'play.min.io',
@@ -11,6 +13,7 @@ export default class RawDataMinioStore implements DataSource {
       secretKey: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG'
     })
     this.bucket = store.bucket('newspapper-test-loopback4-api')
+    this.dbStore = new DbStore(this.bucket)
   }
 
   public getArticle = async (id: string): Promise<IArticle> => {
@@ -20,9 +23,10 @@ export default class RawDataMinioStore implements DataSource {
   }
 
   public getArticles = async (): Promise<IArticle[]> => {
-    const list = await this.bucket.listObjects()
-    const articlesRequest = list.map((item) => {
-      return this.bucket.getString(item.name)
+    const list = await this.dbStore.getTable('articles')
+    const items = list.map((id) => `articles/${id}.json`)
+    const articlesRequest = items.map((item) => {
+      return this.bucket.getString(item).catch(() => '')
     })
     const articles = await Promise.all(articlesRequest)
     return RawDataMaping.articleRawstoArticles(articles.map((e) => JSON.parse(e)))

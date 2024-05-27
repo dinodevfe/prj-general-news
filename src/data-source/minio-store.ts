@@ -8,7 +8,6 @@ interface IMinioStore {
 
 export class MinioStore {
   client: Minio.Client
-
   constructor(init: IMinioStore) {
     this.client = new Minio.Client({
       endPoint: init.endpoint,

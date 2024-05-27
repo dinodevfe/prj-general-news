@@ -1,4 +1,4 @@
-import { MinioBucket } from './MinioStore'
+import { MinioBucket } from './minio-store'
 
 interface ICounts {
   articles: number
@@ -29,16 +29,19 @@ export default class DbStore {
   constructor(bucket: MinioBucket) {
     this.bucket = bucket
     this.store = initialData()
-    this.initial()
   }
 
-  initial = async () => {
-    const dataJsonString = await this.bucket.getString(this.dataSourceName)
-    try {
-      this.store = JSON.parse(dataJsonString)
-    } catch (error) {
-      console.log(error)
-    }
+  dataSync = async () => {
+    return new Promise<void>(async (res, rej) => {
+      const dataJsonString = await this.bucket.getString(this.dataSourceName)
+      try {
+        this.store = JSON.parse(dataJsonString)
+        res()
+      } catch (error) {
+        console.log(error)
+        rej()
+      }
+    })
   }
 
   save = async () => {
@@ -46,11 +49,13 @@ export default class DbStore {
     await this.bucket.putObject(this.dataSourceName, jsonString)
   }
 
-  getTable = (tableName: keyof ICounts) => {
+  getTable = async (tableName: keyof ICounts) => {
+    await this.dataSync()
     return this.store.data[tableName]
   }
 
   update = async (tableName: keyof ICounts, value: string) => {
+    await this.dataSync()
     const table = this.store.data[tableName]
     const dataSet = new Set(table)
     if (dataSet.has(value)) return
@@ -62,6 +67,7 @@ export default class DbStore {
   }
 
   delete = async (tableName: keyof ICounts, value: string) => {
+    await this.dataSync()
     const temp = this.store.data[tableName]
     const dataSet = new Set(temp)
     if (!dataSet.has(value)) return

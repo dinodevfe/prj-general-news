@@ -1,5 +1,5 @@
 import { IArticle } from '@/models'
-import { MinioBucket } from './MinioStore'
+import { MinioBucket } from './minio-store'
 
 export default abstract class DataSource {
   public abstract bucket: MinioBucket
