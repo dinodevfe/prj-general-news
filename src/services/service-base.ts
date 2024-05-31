@@ -13,7 +13,7 @@ export class ServiceBase {
   protected GET = async (url: string) => {
     return fetch(`${this.baseUri}/${url}`, {
       method: 'GET',
-      headers: this.headers
+      headers: this.headers,
     })
   }
 

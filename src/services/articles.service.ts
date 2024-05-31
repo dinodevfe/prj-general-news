@@ -9,8 +9,11 @@ class ArticleServiceBase extends ServiceBase {
   all = async (): Promise<IArticle[]> => {
     try {
       const res = await this.GET(`articles`)
+      console.log(res);
+      
       if (!res.ok) return []
-      return await res.json()
+      const result = await res.json()
+      return result
     } catch (error: any) {
       console.log(error.message)
       return []
